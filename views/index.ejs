@@ -136,28 +136,56 @@
           </div>
           <div class="modal-body">
             <p>Fill out all fields.</p>
-            <form>
+            <form action="/" method="post" id="form-register">
               <div class="mb-2">
-                <label for="first-name" class="col-form-label"
+                <label for="firstName" class="col-form-label"
                   >First Name:</label
                 >
-                <input type="text" class="form-control" id="first-name" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  name="player[firstName]"
+                />
               </div>
               <div class="mb-2">
-                <label for="last-name" class="col-form-label">Last Name:</label>
-                <input type="text" class="form-control" id="last-name" />
+                <label for="lastName" class="col-form-label">Last Name:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  name="player[lastName]"
+                />
               </div>
               <div class="mb-2">
                 <label for="email" class="col-form-label">Email:</label>
-                <input type="email" class="form-control" id="email" />
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="player[email]"
+                />
               </div>
               <div class="mb-2">
-                <label for="Rating" class="col-form-label">Rating:</label>
-                <input type="number" class="form-control" id="Rating" />
+                <label for="rating" class="col-form-label">Rating:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="rating"
+                  name="player[rating]"
+                />
               </div>
             </form>
           </div>
           <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              form="form-register"
+              formmethod="post"
+            >
+              Submit
+            </button>
             <button
               type="button"
               class="btn btn-secondary"
@@ -165,7 +193,6 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
