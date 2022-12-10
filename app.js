@@ -5,6 +5,9 @@ const app = express()
 const path = require('path')
 const ejsMate = require('ejs-mate')
 const Player = require('./models/player')
+// const groupPlayers = require('./public/group')
+const { func } = require('joi')
+const { group } = require('console')
 // const catchAsync = require('./utils/catchAsync')
 // const ExpressError = require('./utils/ExpressError')
 
@@ -28,11 +31,21 @@ app.engine('ejs', ejsMate)
 app.use(express.static('public'))
 
 
+let groupPlayers = []
+
 //routes
 //show a list of players
 app.get('/', async (req,res) => {
     const players = await Player.find({})
     res.render('index',{players})
+})
+
+app.get('/:id/checkin', (req,res) => {
+    if(!groupPlayers.includes(req.params.id)){
+        groupPlayers.push(req.params.id)
+    }
+    console.log(groupPlayers)
+    res.redirect('/')
 })
 
 //add new player
