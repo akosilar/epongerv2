@@ -4,7 +4,6 @@ const methodOverride = require('method-override')
 const app = express()
 const path = require('path')
 const ejsMate = require('ejs-mate')
-const player = require('./models/player')
 const Player = require('./models/player')
 // const catchAsync = require('./utils/catchAsync')
 // const ExpressError = require('./utils/ExpressError')
@@ -30,8 +29,10 @@ app.engine('ejs', ejsMate)
 
 
 //routes
-app.get('/', (req,res) => {
-    res.render('index')
+//show a list of players
+app.get('/', async (req,res) => {
+    const players = await Player.find({})
+    res.render('index',{players})
 })
 
 //add new player

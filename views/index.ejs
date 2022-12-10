@@ -61,20 +61,16 @@
           </tr>
         </thead>
         <tbody>
+          <% players.forEach(player => { %>
+
           <tr data-bs-toggle="modal" data-bs-target="#player1">
-            <th scope="row">1</th>
-            <td>2800</td>
-            <td>Ma</td>
-            <td>Long</td>
-            <td>longma@qq.com</td>
+            <th scope="row"><%= player._id %></th>
+            <td><%= player.rating %></td>
+            <td><%= player.firstName %></td>
+            <td><%= player.lastName %></td>
+            <td><%= player.email %></td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>2800</td>
-            <td>Koki</td>
-            <td>Niwa</td>
-            <td>niwakoki@yahoo.com</td>
-          </tr>
+          <% }) %>
         </tbody>
       </table>
     </section>
@@ -197,6 +193,7 @@
         </div>
       </div>
     </div>
+    <script src="group.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
