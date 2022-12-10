@@ -63,60 +63,24 @@
         <tbody>
           <% players.forEach(player => { %>
 
-          <tr data-bs-toggle="modal" data-bs-target="#player1">
-            <th scope="row"><%= player._id %></th>
+          <tr>
+            <th scope=""><%= player._id %></th>
             <td><%= player.rating %></td>
             <td><%= player.firstName %></td>
             <td><%= player.lastName %></td>
             <td><%= player.email %></td>
+            <td>
+              <button id="checkin" playerId="<%= player._id %>">
+                Check In
+              </button>
+            </td>
           </tr>
           <% }) %>
         </tbody>
       </table>
     </section>
     <!-- Player detail -->
-    <div class="modal" id="player1" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Player Profile</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="card bg-light">
-              <div class="card-body">
-                <img
-                  src="https://img.olympicchannel.com/images/image/private/f_auto/t_1-1_300/primary/fzlkiegp1vzcpvrtm1m7"
-                  class="rounded-circle mb-2"
-                  alt=""
-                />
-                <h3 class="card-title mb-3">Ma Long</h3>
-                <p class="card-text">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Reiciendis tenetur necessitatibus iure eaque quaerat modi?
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-info">Edit profile</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <!-- Register new player -->
     <div class="modal" id="register" tabindex="-1">
       <div class="modal-dialog">

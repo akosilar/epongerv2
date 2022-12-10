@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(methodOverride('_method')) //for routes other than get and post
 app.engine('ejs', ejsMate)
-
+app.use(express.static('public'))
 
 
 //routes
