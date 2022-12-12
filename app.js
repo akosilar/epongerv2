@@ -40,6 +40,16 @@ app.get('/', async (req,res) => {
     res.render('index',{players})
 })
 
+app.get('/makeGroups', async (req,res) => {
+
+    const search = await Promise.all(groupPlayers.map(id => Player.findById(id)))
+    search.sort((a,b) => {
+        return b.rating - a.rating
+    })
+    console.log(search)
+    res.redirect('/')
+})
+
 app.get('/:id/checkin', (req,res) => {
     if(!groupPlayers.includes(req.params.id)){
         groupPlayers.push(req.params.id)
