@@ -41,6 +41,7 @@
       <div class="container">
         <div class="text-center">
           <h1>Player List</h1>
+
           <button
             class="btn btn-primary btn-lg"
             data-bs-toggle="modal"
@@ -48,9 +49,22 @@
           >
             Register New Player
           </button>
-          <a href="/makeGroups" class="btn btn-info btn-lg">Generate Groups</a>
         </div>
       </div>
+      <div>
+        Checked in: <%= groupPlayers.length %>
+        <form action="/makeGroups" method="post">
+          <label for="numberGroups">Number of Groups?</label>
+          <input
+            type="number"
+            name="numberGroups"
+            id="numberGroups"
+            placeholder="3"
+          />
+          <button>Generate Groups</button>
+        </form>
+      </div>
+
       <table class="table">
         <thead>
           <tr>

@@ -32,23 +32,15 @@ app.use(express.static('public'))
 
 
 let groupPlayers = []
+let groups = []
 
 //routes
 //show a list of players
 app.get('/', async (req,res) => {
     const players = await Player.find({})
-    res.render('index',{players})
+    res.render('index',{players, groupPlayers})
 })
 
-app.get('/makeGroups', async (req,res) => {
-
-    const search = await Promise.all(groupPlayers.map(id => Player.findById(id)))
-    search.sort((a,b) => {
-        return b.rating - a.rating
-    })
-    console.log(search)
-    res.redirect('/')
-})
 
 app.get('/:id/checkin', (req,res) => {
     if(!groupPlayers.includes(req.params.id)){
@@ -56,6 +48,25 @@ app.get('/:id/checkin', (req,res) => {
     }
     console.log(groupPlayers)
     res.redirect('/')
+})
+
+//generate groups
+app.post('/makeGroups', async (req,res) => {
+    const {numberGroups} = req.body
+    console.log(numberGroups)
+    for(let i = 1; i<=numberGroups; i++) {
+        const group = []
+        groups.push(group)
+    }
+    console.log(groups)
+    const players = await Player.find({})
+    const search = await Promise.all(groupPlayers.map(id => Player.findById(id)))
+    search.sort((a,b) => {
+        return b.rating - a.rating
+    })
+    console.log(search)
+    res.render('groups',{search})
+
 })
 
 //add new player

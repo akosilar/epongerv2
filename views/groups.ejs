@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eponger v2</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar py-2 fixed-top">
+      <div class="container">
+        <a href="/" class="navbar-brand"><h1>ePonger</h1></a>
+        <button
+          class="navbar-toggler navbar-toggler-icon"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        ></button>
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="#about" class="nav-link">About the software</a>
+            </li>
+            <li class="nav-item">
+              <a href="#contact" class="nav-link">Contact us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Player list -->
+    <section class="p-5 text-center-">
+      <div class="container">
+        <div class="text-center">
+          <h1>Groups</h1>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <!-- <th scope="col">ID</th> -->
+            <th scope="col">Rating</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% search.forEach(player => { %>
+
+          <tr>
+            <!-- <th scope=""><%= player._id %></th> -->
+            <td><%= player.rating %></td>
+            <td><%= player.firstName %></td>
+            <td><%= player.lastName %></td>
+            <td><%= player.email %></td>
+            <!-- <td>
+              <a
+                href="/<%= player._id %>/checkin "
+                id="checkin"
+                class="btn btn-secondary"
+                >Check in</a
+              >
+            </td> -->
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
