@@ -52,12 +52,16 @@ app.get('/:id/checkin', (req,res) => {
 
 //generate groups
 app.post('/makeGroups', async (req,res) => {
+    
+    //creates arrays that will contain the groups
     const {numberGroups} = req.body
     console.log(numberGroups)
     for(let i = 1; i<=numberGroups; i++) {
         const group = []
         groups.push(group)
     }
+    console.log(groups)
+    groups[0].push('test')
     console.log(groups)
     const players = await Player.find({})
     const search = await Promise.all(groupPlayers.map(id => Player.findById(id)))
