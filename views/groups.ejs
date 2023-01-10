@@ -43,6 +43,33 @@
         <div class="text-center">
           <h1>Groups</h1>
         </div>
+        <div>
+          Checked in: <%= playersCheckedIn.length %>
+          <form action="/makeGroups" method="post">
+            <div>
+              <label for="numberGroups">Number of Groups?</label>
+              <input
+                type="number"
+                name="numberGroups"
+                id="numberGroups"
+                placeholder="3"
+                required
+              />
+            </div>
+            <div>
+              <label for="numberGroups">Number of Players per Group?</label>
+              <input
+                type="number"
+                name="numberPlayers"
+                id="numberPlayers"
+                placeholder="4"
+                required
+              />
+            </div>
+            <div>
+              <button>Generate Groups</button>
+            </div>
+          </form>
       </div>
       <table class="table">
         <thead>

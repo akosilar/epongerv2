@@ -31,42 +31,42 @@ app.engine('ejs', ejsMate)
 app.use(express.static('public'))
 
 
-let groupPlayers = []
-let groups = []
+let playersCheckedIn = [] //contains checked in players
+let groups = [] //contains groups of checked in players
 
 //routes
 //show a list of players
 app.get('/', async (req,res) => {
     const players = await Player.find({})
-    res.render('index',{players, groupPlayers})
+    res.render('index',{players, playersCheckedIn})
 })
 
 app.get('/groups', async (req,res) => {
     const players = await Player.find({})
-    const search = await Promise.all(groupPlayers.map(id => Player.findById(id)))
+    const search = await Promise.all(playersCheckedIn.map(id => Player.findById(id)))
     search.sort((a,b) => {
         return b.rating - a.rating
     })
-    console.log(search)
-    res.render('groups',{search})
+    // console.log(search)
+    res.render('groups',{search, players, playersCheckedIn, group})
 })
 
 
 //check in player which adds the player to groupPlayers
 app.get('/:id/checkin', (req,res) => {
-    if(!groupPlayers.includes(req.params.id)){
-        groupPlayers.push(req.params.id)
+    if(!playersCheckedIn.includes(req.params.id)){
+        playersCheckedIn.push(req.params.id)
     }
-    console.log(groupPlayers)
+    console.log(playersCheckedIn)
     res.redirect('/')
 })
 
 //remove player from groupPlayers
 app.get('/:id/remove', async (req,res) => {
-    if(groupPlayers.includes(req.params.id)){
-        groupPlayers.splice(groupPlayers.indexOf(req.params.id),1)
+    if(playersCheckedIn.includes(req.params.id)){
+        playersCheckedIn.splice(playersCheckedIn.indexOf(req.params.id),1)
     }
-    console.log(groupPlayers)
+    console.log(playersCheckedIn)
     res.redirect('/groups')
 
 })
@@ -75,14 +75,16 @@ app.get('/:id/remove', async (req,res) => {
 app.post('/makeGroups', async (req,res) => {
     
     //creates arrays that will contain the groups
-    const {numberGroups} = req.body
-    console.log(numberGroups)
+    const {numberGroups,numberPlayers} = req.body
+    console.log('number of groups: ' + numberGroups)
+    console.log('number of players per group: ' + numberPlayers)
+    
     for(let i = 1; i<=numberGroups; i++) {
-        const group = []
-        groups.push(group)
+        const group = [] //create an empty array that will hold the group of players
+        playersCheckedIn.slice(0,numberPlayers).map(el=>group.push(el)) //push the first numberPlayers into the empty group array
+        playersCheckedIn.splice(0,group.length) //remove the recently added players from groupPlayers
+        groups.push(group) //add the group
     }
-    console.log(groups)
-    groups[0].push('test')
     console.log(groups)
     res.redirect('/groups')
 })
