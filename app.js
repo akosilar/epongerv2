@@ -44,15 +44,16 @@ app.get('/', async (req,res) => {
 app.get('/groups', async (req,res) => {
     const players = await Player.find({})
     const search = await Promise.all(playersCheckedIn.map(id => Player.findById(id)))
+    //sort the players by rating (highest to lowest)
     search.sort((a,b) => {
         return b.rating - a.rating
     })
     // console.log(search)
-    res.render('groups',{search, players, playersCheckedIn, group})
+    res.render('groups',{search, players, playersCheckedIn, groups})
 })
 
 
-//check in player which adds the player to groupPlayers
+//check in player which adds the player to playersCheckedIn
 app.get('/:id/checkin', (req,res) => {
     if(!playersCheckedIn.includes(req.params.id)){
         playersCheckedIn.push(req.params.id)
@@ -61,7 +62,7 @@ app.get('/:id/checkin', (req,res) => {
     res.redirect('/')
 })
 
-//remove player from groupPlayers
+//remove player from playersCheckedIn
 app.get('/:id/remove', async (req,res) => {
     if(playersCheckedIn.includes(req.params.id)){
         playersCheckedIn.splice(playersCheckedIn.indexOf(req.params.id),1)
@@ -74,7 +75,6 @@ app.get('/:id/remove', async (req,res) => {
 //generate groups
 app.post('/makeGroups', async (req,res) => {
     
-    //creates arrays that will contain the groups
     const {numberGroups,numberPlayers} = req.body
     console.log('number of groups: ' + numberGroups)
     console.log('number of players per group: ' + numberPlayers)
