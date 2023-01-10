@@ -63,14 +63,14 @@
             <td><%= player.firstName %></td>
             <td><%= player.lastName %></td>
             <td><%= player.email %></td>
-            <!-- <td>
+            <td>
               <a
-                href="/<%= player._id %>/checkin "
-                id="checkin"
-                class="btn btn-secondary"
-                >Check in</a
+                href="/<%= player._id %>/remove "
+                id="remove"
+                class="btn btn-danger"
+                >Remove</a
               >
-            </td> -->
+            </td>
           </tr>
           <% }) %>
         </tbody>

@@ -41,13 +41,34 @@ app.get('/', async (req,res) => {
     res.render('index',{players, groupPlayers})
 })
 
+app.get('/groups', async (req,res) => {
+    const players = await Player.find({})
+    const search = await Promise.all(groupPlayers.map(id => Player.findById(id)))
+    search.sort((a,b) => {
+        return b.rating - a.rating
+    })
+    console.log(search)
+    res.render('groups',{search})
+})
 
+
+//check in player which adds the player to groupPlayers
 app.get('/:id/checkin', (req,res) => {
     if(!groupPlayers.includes(req.params.id)){
         groupPlayers.push(req.params.id)
     }
     console.log(groupPlayers)
     res.redirect('/')
+})
+
+//remove player from groupPlayers
+app.get('/:id/remove', async (req,res) => {
+    if(groupPlayers.includes(req.params.id)){
+        groupPlayers.splice(groupPlayers.indexOf(req.params.id),1)
+    }
+    console.log(groupPlayers)
+    res.redirect('/groups')
+
 })
 
 //generate groups
@@ -63,15 +84,10 @@ app.post('/makeGroups', async (req,res) => {
     console.log(groups)
     groups[0].push('test')
     console.log(groups)
-    const players = await Player.find({})
-    const search = await Promise.all(groupPlayers.map(id => Player.findById(id)))
-    search.sort((a,b) => {
-        return b.rating - a.rating
-    })
-    console.log(search)
-    res.render('groups',{search})
-
+    res.redirect('/groups')
 })
+
+
 
 //add new player
 app.post('/', async(req,res) => {
