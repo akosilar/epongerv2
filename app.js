@@ -41,15 +41,18 @@ app.get('/', async (req,res) => {
     res.render('index',{players, playersCheckedIn})
 })
 
-app.get('/groups', async (req,res) => {
-    const players = await Player.find({})
+app.get('/checkedin', async (req,res) => {
+    // const players = await Player.find({})
     const search = await Promise.all(playersCheckedIn.map(id => Player.findById(id)))
     //sort the players by rating (highest to lowest)
     search.sort((a,b) => {
         return b.rating - a.rating
     })
     // console.log(search)
-    res.render('groups',{search, players, playersCheckedIn, groups})
+    if (groups.length > 0) {
+    const group = await Promise.all(groups.map(id => Player.findById(id)))
+    }
+    res.render('checkedin',{search, playersCheckedIn, group})
 })
 
 
@@ -68,7 +71,7 @@ app.get('/:id/remove', async (req,res) => {
         playersCheckedIn.splice(playersCheckedIn.indexOf(req.params.id),1)
     }
     console.log(playersCheckedIn)
-    res.redirect('/groups')
+    res.redirect('/checkedin')
 
 })
 

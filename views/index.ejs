@@ -49,8 +49,8 @@
           >
             Register New Player
           </button>
-          <a href="/groups" id="groups" class="btn btn-secondary btn-lg"
-            >View Groups</a
+          <a href="/checkedin" id="checkedin" class="btn btn-secondary btn-lg"
+            >View Checked In</a
           >
           <div>
             Checked in: <%= playersCheckedIn.length %>
@@ -77,17 +77,18 @@
             <th scope="col">First</th>
             <th scope="col">Last</th>
             <th scope="col">Email</th>
+            <th scope="col">Checked In?</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <% players.forEach(player => { %>
-
           <tr>
-            <!-- <th scope=""><%= player._id %></th> -->
             <td><%= player.rating %></td>
             <td><%= player.firstName %></td>
             <td><%= player.lastName %></td>
             <td><%= player.email %></td>
+            <td><%= playersCheckedIn.includes(player._id.toString()) %></td>
             <td>
               <a
                 href="/<%= player._id %>/checkin "
@@ -95,9 +96,6 @@
                 class="btn btn-secondary"
                 >Check in</a
               >
-              <!-- <button id="checkin" playerId="<%= player._id %>">
-                Check In
-              </button> -->
             </td>
           </tr>
           <% }) %>
