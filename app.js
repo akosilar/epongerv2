@@ -55,6 +55,12 @@ app.get('/checkedin', async (req,res) => {
     res.render('checkedin',{search, playersCheckedIn, group})
 })
 
+app.get('/groups', async(req,res) => {
+    const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
+    console.log(search)
+    res.render('groups', search)
+})
+
 
 //check in player which adds the player to playersCheckedIn
 app.get('/:id/checkin', (req,res) => {
