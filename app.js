@@ -8,6 +8,7 @@ const Player = require('./models/player')
 // const groupPlayers = require('./public/group')
 const { func } = require('joi')
 const { group } = require('console')
+const player = require('./models/player')
 // const catchAsync = require('./utils/catchAsync')
 // const ExpressError = require('./utils/ExpressError')
 
@@ -48,17 +49,13 @@ app.get('/checkedin', async (req,res) => {
     search.sort((a,b) => {
         return b.rating - a.rating
     })
-    // console.log(search)
-    if (groups.length > 0) {
-    const group = await Promise.all(groups.map(id => Player.findById(id)))
-    }
-    res.render('checkedin',{search, playersCheckedIn, group})
+    res.render('checkedin',{search, playersCheckedIn})
 })
 
 app.get('/groups', async(req,res) => {
-    const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
-    console.log(search)
-    res.render('groups', search)
+    // const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
+    console.log(groups)
+    res.render('groups', {groups})
 })
 
 
@@ -83,18 +80,22 @@ app.get('/:id/remove', async (req,res) => {
 
 //generate groups
 app.post('/makeGroups', async (req,res) => {
-    
+    groups = [] //re-initialize groups
     const {numberGroups,numberPlayers} = req.body
     console.log('number of groups: ' + numberGroups)
     console.log('number of players per group: ' + numberPlayers)
-    
+    const search = await Promise.all(playersCheckedIn.map(id => Player.findById(id)))
+    search.sort((a,b) => {
+        return b.rating - a.rating
+    })
+    // const pc = search.map(el => el) // create a copy of checked in players.
     for(let i = 1; i<=numberGroups; i++) {
         const group = [] //create an empty array that will hold the group of players
-        playersCheckedIn.slice(0,numberPlayers).map(el=>group.push(el)) //push the first numberPlayers into the empty group array
-        playersCheckedIn.splice(0,group.length) //remove the recently added players from groupPlayers
+        search.slice(0,numberPlayers).map(el=>group.push(el)) //push the first numberPlayers into the empty group array
+        search.splice(0,group.length) //remove the recently added players from groupPlayers
         groups.push(group) //add the group
     }
-    console.log(groups)
+
     res.redirect('/groups')
 })
 
