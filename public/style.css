@@ -28,5 +28,8 @@ tr.vs {
     height: 2px;
     font-size: .75em;
 
+}
 
+.blank {
+    background-color: grey;
 }
