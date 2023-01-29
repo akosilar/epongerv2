@@ -58,6 +58,9 @@ app.get('/groups', async(req,res) => {
     res.render('groups', {groups})
 })
 
+app.get('/sheets', (req,res) => {
+    res.render('sheets')
+})
 
 //check in player which adds the player to playersCheckedIn
 app.get('/:id/checkin', (req,res) => {

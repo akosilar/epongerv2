@@ -6,3 +6,27 @@ body::before {
 .navbar {
     background-color: #e3f2fd;
 }
+
+/* spacing */
+
+table {
+ 
+
+}
+
+thead th {
+    border-bottom: solid;
+    width: 500px;
+}
+
+td {
+    margin-top: 0px;
+    padding: 0px;
+}
+
+tr.vs {
+    height: 2px;
+    font-size: .75em;
+
+
+}
