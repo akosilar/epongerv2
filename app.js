@@ -59,7 +59,7 @@ app.get('/groups', async(req,res) => {
 })
 
 app.get('/sheets', (req,res) => {
-    res.render('sheets')
+    res.render('sheets', {groups})
 })
 
 //check in player which adds the player to playersCheckedIn

@@ -15,7 +15,7 @@
   </head>
   <body>
     <!-- navbar -->
-    <nav class="navbar py-2 fixed-top">
+    <!-- <nav class="navbar py-2 fixed-top">
       <div class="container">
         <a href="" class="navbar-brand"><h1>ePonger</h1></a>
         <button
@@ -35,10 +35,16 @@
           </ul>
         </div>
       </div>
-    </nav>
-    <section class="p-5 text-center">
-   
-        <div class="container">
+    </nav> -->
+    <div class="">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+          <!-- Sidebar content here -->
+          <a href="here">where</a>
+        </div>
+        <div class="w-100">
+          <!-- Main content here -->
+          <% if(groups.length > 0) {groups.forEach((group,groupNumber) => { %>
+            Group <%= groupNumber + 1 %> 
             <table>
                 <thead>
                   <tr>
@@ -77,9 +83,10 @@
                         <td colspan="2">1vs8</td>
                     </tr>
                     <tr>
+                        <!-- player 1 -->
                         <td></td>
-                        <td>Mars</td>
-                        <td>1500</td>
+                        <td><%= (group[0] != undefined) ? group[0].firstName + ' ' + group[0].lastName: 'Player 1' %>  </td>
+                        <td><%= (group[0] != undefined) ? group[0].rating : '' %>  </td>
                         <td class="blank"></td>
                         <td class="blank"></td>
                     </tr>
@@ -97,11 +104,12 @@
                         <td colspan="2">2vs8</td>
                     </tr>
                     <tr>
+                        <!-- player 2 -->
                         <td></td>
-                        <td>Sars</td>
-                        <td>1400</td>
-                        <td>3</td>
-                        <td>0</td>
+                        <td><%= (group[1] != undefined) ? group[1].firstName + ' ' + group[1].lastName: 'Player 2' %>  </td>
+                        <td><%= (group[1] != undefined) ? group[1].rating : '' %>  </td>
+                        <td></td>
+                        <td></td>
                         <td class="blank"></td>
                         <td class="blank"></td>
                     </tr>
@@ -118,9 +126,10 @@
                         <td colspan="2">3vs7</td>
                         <td colspan="2">3vs8</td>
                     </tr>
+                        <!-- player 3 -->
                         <td></td>
-                        <td>p3</td>
-                        <td>1300</td>
+                        <td><%= (group[2] != undefined) ? group[2].firstName + ' ' + group[2].lastName: 'Player 3' %>  </td>
+                        <td><%= (group[2] != undefined) ? group[2].rating : '' %>  </td>
                         <td>1</td>
                         <td>2</td>
                         <td>0</td>
@@ -143,8 +152,10 @@
                             <td colspan="2">4vs8</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>p4</td>
+                            <!-- player 4 -->
+                        <td></td>
+                        <td><%= (group[3] != undefined) ? group[3].firstName + ' ' + group[3].lastName: 'Player 4' %>  </td>
+                        <td><%= (group[3] != undefined) ? group[3].rating : '' %>  </td>
                         </tr>
                         <tr class="vs">
                             <td></td>
@@ -160,8 +171,10 @@
                             <td colspan="2">5vs8</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>p5</td>
+                            <!-- player 5 -->
+                        <td></td>
+                        <td><%= (group[4] != undefined) ? group[4].firstName + ' ' + group[4].lastName: 'Player 5' %>  </td>
+                        <td><%= (group[4] != undefined) ? group[4].rating : '' %>  </td>
                         </tr>
                         <tr class="vs">
                             <td></td>
@@ -177,8 +190,10 @@
                             <td colspan="2">6vs8</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>p6</td>
+                            <!-- player 6 -->
+                        <td></td>
+                        <td><%= (group[5] != undefined) ? group[5].firstName + ' ' + group[5].lastName: 'Player 6' %>  </td>
+                        <td><%= (group[5] != undefined) ? group[5].rating : '' %>  </td>
                         </tr>
                         <tr class="vs">
                             <td></td>
@@ -194,8 +209,10 @@
                             <td colspan="2">7vs8</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>p7</td>
+                            <!-- player 7 -->
+                        <td></td>
+                        <td><%= (group[6] != undefined) ? group[6].firstName + ' ' + group[6].lastName: 'Player 7' %>  </td>
+                        <td><%= (group[6] != undefined) ? group[6].rating : '' %>  </td>
                         </tr>
                         <tr class="vs">
                             <td></td>
@@ -211,17 +228,17 @@
                             <td colspan="2" class="blank"></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>p8</td>
+                            <!-- player 8 -->
+                        <td></td>
+                        <td><%= (group[7] != undefined) ? group[7].firstName + ' ' + group[7].lastName: 'Player 8' %>  </td>
+                        <td><%= (group[7] != undefined) ? group[7].rating : '' %>  </td>
                         </tr>
                   </tbody>
                 </thead>
               </table>
+           <% })} %> 
         </div>
-
-
-    </section>
-
+      </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
