@@ -1,23 +1,5 @@
 module.exports = [
     {
-        firstName: 'Lars',
-        lastName: 'Austero',
-        email: 'jan@yahoo.com',
-        rating: 1200
-    },
-    {
-        firstName: 'Hars',
-        lastName: 'Aester',
-        email: 'haee@yahoo.com',
-        rating: 1300
-    },
-    {
-        firstName: 'Pars',
-        lastName: 'Eusero',
-        email: 'pea@ynn.com',
-        rating: 200
-    },
-    {
         firstName: 'Koki',
         lastName: 'Niwa',
         email: 'kn@alibaba.com',

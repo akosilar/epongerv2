@@ -111,6 +111,12 @@ app.post('/', async(req,res) => {
     res.redirect('/')
 })
 
+app.delete('/:id', async(req,res) => {
+    const {id} = req.params
+    await Player.findByIdAndDelete(id)
+    res.redirect('/')
+})
+
 app.listen(3000, () => {
     console.log('listening on port 3000')
 })
