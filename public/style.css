@@ -3,16 +3,14 @@ body::before {
     content: '';
     height: 60px;
 }
-.navbar {
+
+
+/* .navbar {
     background-color: #e3f2fd;
-}
+} */
 
 /* spacing */
 
-table {
- 
-
-}
 
 thead th {
     border-bottom: solid;

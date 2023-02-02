@@ -15,7 +15,7 @@
   </head>
   <body>
     <!-- navbar -->
-    <%- include('partials/navbar') %>
+    <%- include('partials/sidebar') %>
 
     <!-- Player list -->
     <section class="p-5 text-center-">
@@ -33,20 +33,7 @@
           <a href="/checkedin" id="checkedin" class="btn btn-secondary btn-lg"
             >View Checked In</a
           >
-          <div>
-            Checked in: <%= playersCheckedIn.length %>
-            <!-- <form action="/makeGroups" method="post">
-              <label for="numberGroups">Number of Groups?</label>
-              <input
-                type="number"
-                name="numberGroups"
-                id="numberGroups"
-                placeholder="3"
-                required
-              />
-              <button>Generate Groups</button>
-            </form> -->
-          </div>
+          <div>Checked in: <%= playersCheckedIn.length %></div>
         </div>
       </div>
 

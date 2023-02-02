@@ -15,212 +15,209 @@
   </head>
   <body>
     <!-- navbar -->
-    <%- include('partials/navbar') %> 
+    <!-- <%- include('partials/navbar') %>  -->
     
-    <div class="">
-        <div class="bg-light border-right" id="sidebar-wrapper">
-          <!-- Sidebar content here -->
-          <a href="here">where</a>
-        </div>
-        <div class="w-100">
+    <div class=" d-flex">
+        <%- include('partials/sidebar') %> 
+        <div class="">
           <!-- Main content here -->
-          
+          <% if(groups.length > 0) {groups.forEach((group,groupNumber) => { %>
+            Group <%= groupNumber + 1 %> 
+            <table>
+                <thead>
+                  <tr>
+                    <th>PN</th>
+                    <th>Player</th>
+                    <th>Rating</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>W</th>
+                    <th>L</th>
+                  </tr>
+                  <tbody>
+                    <tr class="vs">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2" class="blank"></td>
+                        <td colspan="2">1vs2</td>
+                        <td colspan="2">1vs3</td>
+                        <td colspan="2">1vs4</td>
+                        <td colspan="2">1vs5</td>
+                        <td colspan="2">1vs6</td>
+                        <td colspan="2">1vs7</td>
+                        <td colspan="2">1vs8</td>
+                    </tr>
+                    <tr>
+                        <!-- player 1 -->
+                        <td></td>
+                        <td><%= (group[0] != undefined) ? group[0].firstName + ' ' + group[0].lastName: 'Player 1' %>  </td>
+                        <td><%= (group[0] != undefined) ? group[0].rating : '' %>  </td>
+                        <td class="blank"></td>
+                        <td class="blank"></td>
+                    </tr>
+                    <tr class="vs">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">2vs1</td>
+                        <td colspan="2" class="blank"></td>
+                        <td colspan="2">2vs3</td>
+                        <td colspan="2">2vs4</td>
+                        <td colspan="2">2vs5</td>
+                        <td colspan="2">2vs6</td>
+                        <td colspan="2">2vs7</td>
+                        <td colspan="2">2vs8</td>
+                    </tr>
+                    <tr>
+                        <!-- player 2 -->
+                        <td></td>
+                        <td><%= (group[1] != undefined) ? group[1].firstName + ' ' + group[1].lastName: 'Player 2' %>  </td>
+                        <td><%= (group[1] != undefined) ? group[1].rating : '' %>  </td>
+                        <td></td>
+                        <td></td>
+                        <td class="blank"></td>
+                        <td class="blank"></td>
+                    </tr>
+                    <tr class="vs">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">3vs1</td>
+                        <td colspan="2">3vs2</td>
+                        <td colspan="2" class="blank"></td>
+                        <td colspan="2">3vs4</td>
+                        <td colspan="2">3vs5</td>
+                        <td colspan="2">3vs6</td>
+                        <td colspan="2">3vs7</td>
+                        <td colspan="2">3vs8</td>
+                    </tr>
+                        <!-- player 3 -->
+                        <td></td>
+                        <td><%= (group[2] != undefined) ? group[2].firstName + ' ' + group[2].lastName: 'Player 3' %>  </td>
+                        <td><%= (group[2] != undefined) ? group[2].rating : '' %>  </td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td></td>
+                        <td></td>
+                        <td>1</td>
+                        <td>2</td>
+                        <tr class="vs">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2">4vs1</td>
+                            <td colspan="2">4vs2</td>
+                            <td colspan="2">4vs3</td>
+                            <td colspan="2" class="blank"></td>
+                            <td colspan="2">4vs5</td>
+                            <td colspan="2">4vs6</td>
+                            <td colspan="2">4vs7</td>
+                            <td colspan="2">4vs8</td>
+                        </tr>
+                        <tr>
+                            <!-- player 4 -->
+                        <td></td>
+                        <td><%= (group[3] != undefined) ? group[3].firstName + ' ' + group[3].lastName: 'Player 4' %>  </td>
+                        <td><%= (group[3] != undefined) ? group[3].rating : '' %>  </td>
+                        </tr>
+                        <tr class="vs">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2">5vs1</td>
+                            <td colspan="2">5vs2</td>
+                            <td colspan="2">5vs3</td>
+                            <td colspan="2">5vs4</td>
+                            <td colspan="2" class="blank"></td>
+                            <td colspan="2">5vs6</td>
+                            <td colspan="2">5vs7</td>
+                            <td colspan="2">5vs8</td>
+                        </tr>
+                        <tr>
+                            <!-- player 5 -->
+                        <td></td>
+                        <td><%= (group[4] != undefined) ? group[4].firstName + ' ' + group[4].lastName: 'Player 5' %>  </td>
+                        <td><%= (group[4] != undefined) ? group[4].rating : '' %>  </td>
+                        </tr>
+                        <tr class="vs">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2">6vs1</td>
+                            <td colspan="2">6vs2</td>
+                            <td colspan="2">6vs3</td>
+                            <td colspan="2">6vs4</td>
+                            <td colspan="2">6vs5</td>
+                            <td colspan="2" class="blank"></td>
+                            <td colspan="2">6vs7</td>
+                            <td colspan="2">6vs8</td>
+                        </tr>
+                        <tr>
+                            <!-- player 6 -->
+                        <td></td>
+                        <td><%= (group[5] != undefined) ? group[5].firstName + ' ' + group[5].lastName: 'Player 6' %>  </td>
+                        <td><%= (group[5] != undefined) ? group[5].rating : '' %>  </td>
+                        </tr>
+                        <tr class="vs">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2">7vs1</td>
+                            <td colspan="2">7vs2</td>
+                            <td colspan="2">7vs3</td>
+                            <td colspan="2">7vs4</td>
+                            <td colspan="2">7vs5</td>
+                            <td colspan="2">7vs6</td>
+                            <td colspan="2" class="blank"></td>
+                            <td colspan="2">7vs8</td>
+                        </tr>
+                        <tr>
+                            <!-- player 7 -->
+                        <td></td>
+                        <td><%= (group[6] != undefined) ? group[6].firstName + ' ' + group[6].lastName: 'Player 7' %>  </td>
+                        <td><%= (group[6] != undefined) ? group[6].rating : '' %>  </td>
+                        </tr>
+                        <tr class="vs">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2">8vs1</td>
+                            <td colspan="2">8vs2</td>
+                            <td colspan="2">8vs3</td>
+                            <td colspan="2">8vs4</td>
+                            <td colspan="2">8vs5</td>
+                            <td colspan="2">8vs6</td>
+                            <td colspan="2">8vs7</td>
+                            <td colspan="2" class="blank"></td>
+                        </tr>
+                        <tr>
+                            <!-- player 8 -->
+                        <td></td>
+                        <td><%= (group[7] != undefined) ? group[7].firstName + ' ' + group[7].lastName: 'Player 8' %>  </td>
+                        <td><%= (group[7] != undefined) ? group[7].rating : '' %>  </td>
+                        </tr>
+                  </tbody>
+                </thead>
+              </table>
+           <% })} %> 
         </div>
       </div>
-      <% if(groups.length > 0) {groups.forEach((group,groupNumber) => { %>
-        Group <%= groupNumber + 1 %> 
-        <table>
-            <thead>
-              <tr>
-                <th>PN</th>
-                <th>Player</th>
-                <th>Rating</th>
-                <th>W</th>
-                <th>L</th>
-                <th>W</th>
-                <th>L</th>
-                <th>W</th>
-                <th>L</th>
-                <th>W</th>
-                <th>L</th>
-                <th>W</th>
-                <th>L</th>
-                <th>W</th>
-                <th>L</th>
-                <th>W</th>
-                <th>L</th>
-                <th>W</th>
-                <th>L</th>
-              </tr>
-              <tbody>
-                <tr class="vs">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td colspan="2" class="blank"></td>
-                    <td colspan="2">1vs2</td>
-                    <td colspan="2">1vs3</td>
-                    <td colspan="2">1vs4</td>
-                    <td colspan="2">1vs5</td>
-                    <td colspan="2">1vs6</td>
-                    <td colspan="2">1vs7</td>
-                    <td colspan="2">1vs8</td>
-                </tr>
-                <tr>
-                    <!-- player 1 -->
-                    <td></td>
-                    <td><%= (group[0] != undefined) ? group[0].firstName + ' ' + group[0].lastName: 'Player 1' %>  </td>
-                    <td><%= (group[0] != undefined) ? group[0].rating : '' %>  </td>
-                    <td class="blank"></td>
-                    <td class="blank"></td>
-                </tr>
-                <tr class="vs">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td colspan="2">2vs1</td>
-                    <td colspan="2" class="blank"></td>
-                    <td colspan="2">2vs3</td>
-                    <td colspan="2">2vs4</td>
-                    <td colspan="2">2vs5</td>
-                    <td colspan="2">2vs6</td>
-                    <td colspan="2">2vs7</td>
-                    <td colspan="2">2vs8</td>
-                </tr>
-                <tr>
-                    <!-- player 2 -->
-                    <td></td>
-                    <td><%= (group[1] != undefined) ? group[1].firstName + ' ' + group[1].lastName: 'Player 2' %>  </td>
-                    <td><%= (group[1] != undefined) ? group[1].rating : '' %>  </td>
-                    <td></td>
-                    <td></td>
-                    <td class="blank"></td>
-                    <td class="blank"></td>
-                </tr>
-                <tr class="vs">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td colspan="2">3vs1</td>
-                    <td colspan="2">3vs2</td>
-                    <td colspan="2" class="blank"></td>
-                    <td colspan="2">3vs4</td>
-                    <td colspan="2">3vs5</td>
-                    <td colspan="2">3vs6</td>
-                    <td colspan="2">3vs7</td>
-                    <td colspan="2">3vs8</td>
-                </tr>
-                    <!-- player 3 -->
-                    <td></td>
-                    <td><%= (group[2] != undefined) ? group[2].firstName + ' ' + group[2].lastName: 'Player 3' %>  </td>
-                    <td><%= (group[2] != undefined) ? group[2].rating : '' %>  </td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>0</td>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                    <td>1</td>
-                    <td>2</td>
-                    <tr class="vs">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2">4vs1</td>
-                        <td colspan="2">4vs2</td>
-                        <td colspan="2">4vs3</td>
-                        <td colspan="2" class="blank"></td>
-                        <td colspan="2">4vs5</td>
-                        <td colspan="2">4vs6</td>
-                        <td colspan="2">4vs7</td>
-                        <td colspan="2">4vs8</td>
-                    </tr>
-                    <tr>
-                        <!-- player 4 -->
-                    <td></td>
-                    <td><%= (group[3] != undefined) ? group[3].firstName + ' ' + group[3].lastName: 'Player 4' %>  </td>
-                    <td><%= (group[3] != undefined) ? group[3].rating : '' %>  </td>
-                    </tr>
-                    <tr class="vs">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2">5vs1</td>
-                        <td colspan="2">5vs2</td>
-                        <td colspan="2">5vs3</td>
-                        <td colspan="2">5vs4</td>
-                        <td colspan="2" class="blank"></td>
-                        <td colspan="2">5vs6</td>
-                        <td colspan="2">5vs7</td>
-                        <td colspan="2">5vs8</td>
-                    </tr>
-                    <tr>
-                        <!-- player 5 -->
-                    <td></td>
-                    <td><%= (group[4] != undefined) ? group[4].firstName + ' ' + group[4].lastName: 'Player 5' %>  </td>
-                    <td><%= (group[4] != undefined) ? group[4].rating : '' %>  </td>
-                    </tr>
-                    <tr class="vs">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2">6vs1</td>
-                        <td colspan="2">6vs2</td>
-                        <td colspan="2">6vs3</td>
-                        <td colspan="2">6vs4</td>
-                        <td colspan="2">6vs5</td>
-                        <td colspan="2" class="blank"></td>
-                        <td colspan="2">6vs7</td>
-                        <td colspan="2">6vs8</td>
-                    </tr>
-                    <tr>
-                        <!-- player 6 -->
-                    <td></td>
-                    <td><%= (group[5] != undefined) ? group[5].firstName + ' ' + group[5].lastName: 'Player 6' %>  </td>
-                    <td><%= (group[5] != undefined) ? group[5].rating : '' %>  </td>
-                    </tr>
-                    <tr class="vs">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2">7vs1</td>
-                        <td colspan="2">7vs2</td>
-                        <td colspan="2">7vs3</td>
-                        <td colspan="2">7vs4</td>
-                        <td colspan="2">7vs5</td>
-                        <td colspan="2">7vs6</td>
-                        <td colspan="2" class="blank"></td>
-                        <td colspan="2">7vs8</td>
-                    </tr>
-                    <tr>
-                        <!-- player 7 -->
-                    <td></td>
-                    <td><%= (group[6] != undefined) ? group[6].firstName + ' ' + group[6].lastName: 'Player 7' %>  </td>
-                    <td><%= (group[6] != undefined) ? group[6].rating : '' %>  </td>
-                    </tr>
-                    <tr class="vs">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2">8vs1</td>
-                        <td colspan="2">8vs2</td>
-                        <td colspan="2">8vs3</td>
-                        <td colspan="2">8vs4</td>
-                        <td colspan="2">8vs5</td>
-                        <td colspan="2">8vs6</td>
-                        <td colspan="2">8vs7</td>
-                        <td colspan="2" class="blank"></td>
-                    </tr>
-                    <tr>
-                        <!-- player 8 -->
-                    <td></td>
-                    <td><%= (group[7] != undefined) ? group[7].firstName + ' ' + group[7].lastName: 'Player 8' %>  </td>
-                    <td><%= (group[7] != undefined) ? group[7].rating : '' %>  </td>
-                    </tr>
-              </tbody>
-            </thead>
-          </table>
-       <% })} %> 
+      
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
