@@ -51,7 +51,9 @@
         </thead>
         <tbody>
           <% players.forEach(player => { %>
-          <tr>
+          <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <%- include('partials/profile',{player}) %>
+
             <td><%= player.rating %></td>
             <td><%= player.firstName %></td>
             <td><%= player.lastName %></td>

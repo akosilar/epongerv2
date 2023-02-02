@@ -11,19 +11,18 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- navbar -->
-    <!-- <%- include('partials/navbar') %>  -->
-    
-    <div class=" d-flex">
+    <div class="p-5 d-flex">
         <%- include('partials/sidebar') %> 
-        <div class="">
+        <div class="text-center">
           <!-- Main content here -->
-          <% if(groups.length > 0) {groups.forEach((group,groupNumber) => { %>
-            Group <%= groupNumber + 1 %> 
-            <table>
+          <h1>test</h1>
+          <% groups.forEach((group,groupNumber) => { %>
+            Group <%= (groupNumber != undefined) ? groupNumber + 1 : '' %> 
+            <table class="table table-striped table-sm">
                 <thead>
                   <tr>
                     <th>PN</th>
@@ -65,8 +64,22 @@
                         <td></td>
                         <td><%= (group[0] != undefined) ? group[0].firstName + ' ' + group[0].lastName: 'Player 1' %>  </td>
                         <td><%= (group[0] != undefined) ? group[0].rating : '' %>  </td>
-                        <td class="blank"></td>
-                        <td class="blank"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr class="vs">
                         <td></td>
@@ -112,8 +125,8 @@
                         <td>2</td>
                         <td>0</td>
                         <td>3</td>
-                        <td></td>
-                        <td></td>
+                        <td class="blank"></td>
+                        <td class="blank"></td>
                         <td>1</td>
                         <td>2</td>
                         <tr class="vs">
@@ -134,6 +147,14 @@
                         <td></td>
                         <td><%= (group[3] != undefined) ? group[3].firstName + ' ' + group[3].lastName: 'Player 4' %>  </td>
                         <td><%= (group[3] != undefined) ? group[3].rating : '' %>  </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="blank"></td>
+                        <td class="blank"></td>
                         </tr>
                         <tr class="vs">
                             <td></td>
@@ -153,6 +174,16 @@
                         <td></td>
                         <td><%= (group[4] != undefined) ? group[4].firstName + ' ' + group[4].lastName: 'Player 5' %>  </td>
                         <td><%= (group[4] != undefined) ? group[4].rating : '' %>  </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="blank"></td>
+                        <td class="blank"></td>
                         </tr>
                         <tr class="vs">
                             <td></td>
@@ -172,6 +203,18 @@
                         <td></td>
                         <td><%= (group[5] != undefined) ? group[5].firstName + ' ' + group[5].lastName: 'Player 6' %>  </td>
                         <td><%= (group[5] != undefined) ? group[5].rating : '' %>  </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="blank"></td>
+                        <td class="blank"></td>
                         </tr>
                         <tr class="vs">
                             <td></td>
@@ -191,6 +234,20 @@
                         <td></td>
                         <td><%= (group[6] != undefined) ? group[6].firstName + ' ' + group[6].lastName: 'Player 7' %>  </td>
                         <td><%= (group[6] != undefined) ? group[6].rating : '' %>  </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="blank"></td>
+                        <td class="blank"></td>
                         </tr>
                         <tr class="vs">
                             <td></td>
@@ -210,14 +267,31 @@
                         <td></td>
                         <td><%= (group[7] != undefined) ? group[7].firstName + ' ' + group[7].lastName: 'Player 8' %>  </td>
                         <td><%= (group[7] != undefined) ? group[7].rating : '' %>  </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="blank"></td>
+                        <td class="blank"></td>
                         </tr>
                   </tbody>
                 </thead>
               </table>
-           <% })} %> 
+           <% }) %> 
         </div>
       </div>
-      
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M11.315 10.014a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.488 0c1.398-.864 3.544 1.838-.952 3.434-3.067-3.554.19-4.858.952-3.434z"/></svg>
+
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
