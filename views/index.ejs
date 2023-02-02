@@ -51,9 +51,8 @@
         </thead>
         <tbody>
           <% players.forEach(player => { %>
-          <tr data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            <%- include('partials/profile',{player}) %>
-
+          <tr data-bs-toggle="modal" data-bs-target="#w<%=player._id%>">
+            <%-include('partials/profile',{player}) %>
             <td><%= player.rating %></td>
             <td><%= player.firstName %></td>
             <td><%= player.lastName %></td>
@@ -75,81 +74,7 @@
     <!-- Player detail -->
 
     <!-- Register new player -->
-    <div class="modal" id="register" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Register new player</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>Fill out all fields.</p>
-            <form action="/" method="post" id="form-register">
-              <div class="mb-2">
-                <label for="firstName" class="col-form-label"
-                  >First Name:</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="firstName"
-                  name="player[firstName]"
-                />
-              </div>
-              <div class="mb-2">
-                <label for="lastName" class="col-form-label">Last Name:</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="lastName"
-                  name="player[lastName]"
-                />
-              </div>
-              <div class="mb-2">
-                <label for="email" class="col-form-label">Email:</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="player[email]"
-                />
-              </div>
-              <div class="mb-2">
-                <label for="rating" class="col-form-label">Rating:</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="rating"
-                  name="player[rating]"
-                />
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              form="form-register"
-              formmethod="post"
-            >
-              Submit
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%- include('partials/new') %>
 
     <script src="group.js"></script>
     <script
