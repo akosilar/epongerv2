@@ -51,7 +51,12 @@
         </thead>
         <tbody>
           <% players.forEach(player => { %>
-          <tr data-bs-toggle="modal" data-bs-target="#w<%=player._id%>">
+          <tr 
+          <% if (playersCheckedIn.includes(player._id.toString()) === true)  { %>
+            class="table-active" 
+            <% } %>
+          
+          data-bs-toggle="modal" data-bs-target="#w<%=player._id%>">
             <%-include('partials/profile',{player}) %>
             <td><%= player.rating %></td>
             <td><%= player.firstName %></td>
