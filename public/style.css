@@ -1,5 +1,5 @@
 body::before {
-    display:block;
+    display: block;
     content: '';
     height: 60px;
 }
@@ -20,6 +20,10 @@ thead th {
 td {
     margin-top: 0px;
     padding: 0px;
+}
+
+td input {
+    width: 30px
 }
 
 tr.vs {
