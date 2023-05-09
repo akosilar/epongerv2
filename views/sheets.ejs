@@ -65,22 +65,13 @@
                         <td></td>
                         <td><%= (group[0] != undefined) ? group[0].firstName + ' ' + group[0].lastName: 'Player 1' %>  </td>
                         <td><%= (group[0] != undefined) ? group[0].rating : '' %>  </td>
-                        <td></td>
-                        <td></td>
-                        <td><input type="number" size="1" name="player1wins"></td>
-                        <td><input type="number" name="player1losses"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <% for( let i = 1; i <= 8; i++ ) { %>
+                        <td colspan="2" data-bs-toggle="modal" data-bs-target="<%= (i === 1) ? '' : '#w' + i %>"> <%= (i === 1) ?  '' : '1vs' + i%> </td>
+                        <%-include('partials/match',{p1: '1',p2: i, modalId: i}) %>
+                        <% } %>
+                      
+                        
+                        
                     </tr>
                     <tr class="vs">
                         <td></td>
