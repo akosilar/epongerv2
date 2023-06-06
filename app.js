@@ -108,7 +108,9 @@ app.post('/makeGroups', async (req, res) => {
         for (let i = 0; i < groups.length; i++) {
             console.log(`group ${i + 1}:`)
             for (let j = 0; j < groups[i].length; j++) {
-                console.log(groups[i][j])
+                for (let k = j; k < groups[i].length - 1; k++) {
+                    console.log(`${groups[i][j].firstName} vs ${groups[i][k + 1].firstName}`)
+                }
             }
         }
 
