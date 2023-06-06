@@ -14,13 +14,13 @@ const player = require('./models/player')
 
 //local db connection
 mongoose.connect('mongodb://localhost:27017/eponger')
-.then(() => {
-    console.log('mongo connection open')
-})
-.catch(err => {
-    console.log('oh noes. Mongo connection problem')
-    console.log(err)
-})
+    .then(() => {
+        console.log('mongo connection open')
+    })
+    .catch(err => {
+        console.log('oh noes. Mongo connection problem')
+        console.log(err)
+    })
 
 
 //middleware
@@ -35,36 +35,39 @@ app.use(express.static('public'))
 let playersCheckedIn = [] //contains checked in players
 let groups = [] //contains groups of checked in players
 
+//
+
+
 //routes
 //show a list of players
-app.get('/', async (req,res) => {
+app.get('/', async (req, res) => {
     const players = await Player.find({})
-    res.render('index',{players, playersCheckedIn})
+    res.render('index', { players, playersCheckedIn })
 })
 
-app.get('/checkedin', async (req,res) => {
+app.get('/checkedin', async (req, res) => {
     // const players = await Player.find({})
     const search = await Promise.all(playersCheckedIn.map(id => Player.findById(id)))
     //sort the players by rating (highest to lowest)
-    search.sort((a,b) => {
+    search.sort((a, b) => {
         return b.rating - a.rating
     })
-    res.render('checkedin',{search, playersCheckedIn})
+    res.render('checkedin', { search, playersCheckedIn })
 })
 
-app.get('/groups', async(req,res) => {
+app.get('/groups', async (req, res) => {
     // const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
     console.log(groups)
-    res.render('groups', {groups})
+    res.render('groups', { groups })
 })
 
-app.get('/sheets', (req,res) => {
-    res.render('sheets', {groups})
+app.get('/sheets', (req, res) => {
+    res.render('sheets', { groups })
 })
 
 //check in player which adds the player to playersCheckedIn
-app.get('/:id/checkin', (req,res) => {
-    if(!playersCheckedIn.includes(req.params.id)){
+app.get('/:id/checkin', (req, res) => {
+    if (!playersCheckedIn.includes(req.params.id)) {
         playersCheckedIn.push(req.params.id)
     }
     console.log(playersCheckedIn)
@@ -72,9 +75,9 @@ app.get('/:id/checkin', (req,res) => {
 })
 
 //remove player from playersCheckedIn
-app.get('/:id/remove', async (req,res) => {
-    if(playersCheckedIn.includes(req.params.id)){
-        playersCheckedIn.splice(playersCheckedIn.indexOf(req.params.id),1)
+app.get('/:id/remove', async (req, res) => {
+    if (playersCheckedIn.includes(req.params.id)) {
+        playersCheckedIn.splice(playersCheckedIn.indexOf(req.params.id), 1)
     }
     console.log(playersCheckedIn)
     res.redirect('/checkedin')
@@ -82,37 +85,49 @@ app.get('/:id/remove', async (req,res) => {
 })
 
 //generate groups
-app.post('/makeGroups', async (req,res) => {
+app.post('/makeGroups', async (req, res) => {
     groups = [] //re-initialize groups
-    const {numberGroups,numberPlayers} = req.body
+    const { numberGroups, numberPlayers } = req.body
     console.log('number of groups: ' + numberGroups)
     console.log('number of players per group: ' + numberPlayers)
     const search = await Promise.all(playersCheckedIn.map(id => Player.findById(id)))
-    search.sort((a,b) => {
+    search.sort((a, b) => {
         return b.rating - a.rating
     })
     // const pc = search.map(el => el) // create a copy of checked in players.
-    for(let i = 1; i<=numberGroups; i++) {
+    for (let i = 1; i <= numberGroups; i++) {
         const group = [] //create an empty array that will hold the group of players
-        search.slice(0,numberPlayers).map(el=>group.push(el)) //push the first numberPlayers into the empty group array
-        search.splice(0,group.length) //remove the recently added players from groupPlayers
+        search.slice(0, numberPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
+        search.splice(0, group.length) //remove the recently added players from groupPlayers
         groups.push(group) //add the group
     }
 
+    //generate round robin
+    const makeRR = (groups) => {
+        console.log(`Number of groups: ${groups.length}`)
+        for (let i = 0; i < groups.length; i++) {
+            console.log(`group ${i + 1}:`)
+            for (let j = 0; j < groups[i].length; j++) {
+                console.log(groups[i][j])
+            }
+        }
+
+    }
+    makeRR(groups)
     res.redirect('/groups')
 })
 
 
 
 //add new player
-app.post('/', async(req,res) => {
+app.post('/', async (req, res) => {
     const player = new Player(req.body.player)
     await player.save()
     res.redirect('/')
 })
 
-app.delete('/:id', async(req,res) => {
-    const {id} = req.params
+app.delete('/:id', async (req, res) => {
+    const { id } = req.params
     await Player.findByIdAndDelete(id)
     res.redirect('/')
 })
