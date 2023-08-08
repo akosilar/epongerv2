@@ -33,138 +33,6 @@
       <div class="row">
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           
-    
-          <!-- <h2>Players</h2>
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>random</td>
-                  <td>data</td>
-                  <td>placeholder</td>
-                  <td>text</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>placeholder</td>
-                  <td>irrelevant</td>
-                  <td>visual</td>
-                  <td>layout</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>data</td>
-                  <td>rich</td>
-                  <td>dashboard</td>
-                  <td>tabular</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>information</td>
-                  <td>placeholder</td>
-                  <td>illustrative</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>text</td>
-                  <td>random</td>
-                  <td>layout</td>
-                  <td>dashboard</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>dashboard</td>
-                  <td>irrelevant</td>
-                  <td>text</td>
-                  <td>placeholder</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>dashboard</td>
-                  <td>illustrative</td>
-                  <td>rich</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>placeholder</td>
-                  <td>tabular</td>
-                  <td>information</td>
-                  <td>irrelevant</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>random</td>
-                  <td>data</td>
-                  <td>placeholder</td>
-                  <td>text</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>placeholder</td>
-                  <td>irrelevant</td>
-                  <td>visual</td>
-                  <td>layout</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>data</td>
-                  <td>rich</td>
-                  <td>dashboard</td>
-                  <td>tabular</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>information</td>
-                  <td>placeholder</td>
-                  <td>illustrative</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>text</td>
-                  <td>placeholder</td>
-                  <td>layout</td>
-                  <td>dashboard</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>dashboard</td>
-                  <td>irrelevant</td>
-                  <td>text</td>
-                  <td>visual</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>dashboard</td>
-                  <td>illustrative</td>
-                  <td>rich</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>random</td>
-                  <td>tabular</td>
-                  <td>information</td>
-                  <td>text</td>
-                </tr>
-              </tbody>
-            </table>
-          </div> -->
-
-
-
     <!-- Player list -->
       <div class="container">
         <div class="text-center">
@@ -183,46 +51,84 @@
           <div>Checked in: <%= playersCheckedIn.length %></div>
         </div>
       </div>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <!-- <th scope="col">ID</th> -->
-              <th scope="col">Rating</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Email</th>
-              <th scope="col">Checked In?</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% players.forEach(player => { %>
-            <tr 
-            <% if (playersCheckedIn.includes(player._id.toString()) === true)  { %>
-              class="table-active" 
-              <% } %>
-            
-            data-bs-toggle="modal" data-bs-target="#w<%=player._id%>">
-              <%-include('partials/profile',{player}) %>
-              <td><%= player.rating %></td>
-              <td><%= player.firstName %></td>
-              <td><%= player.lastName %></td>
-              <td><%= player.email %></td>
-              <td><%= playersCheckedIn.includes(player._id.toString()) %></td>
-              <td>
-                <a
-                  href="/<%= player._id %>/checkin "
-                  id="checkin"
-                  class="btn btn-secondary"
-                  >Check in</a
-                >
-              </td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
+      <div>
+        <div class="row">
+          <div class="col">
+            <div class="table-responsive">
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col">ID</th> -->
+                    <th scope="col">Rating</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Checked In?</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% players.forEach(player => { %>
+                  <tr 
+                  <% if (playersCheckedIn.includes(player._id.toString()) === true)  { %>
+                    class="table-active" 
+                    <% } %>
+                  
+                  data-bs-toggle="modal" data-bs-target="#w<%=player._id%>">
+                    <%-include('partials/profile',{player}) %>
+                    <td><%= player.rating %></td>
+                    <td><%= player.firstName %></td>
+                    <td><%= player.lastName %></td>
+                    <td><%= player.email %></td>
+                    <td><%= playersCheckedIn.includes(player._id.toString()) %></td>
+                    <td>
+                      <a
+                        href="/<%= player._id %>/checkin "
+                        id="checkin"
+                        class="btn btn-secondary"
+                        >Check in</a
+                      >
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col">
+            <table class="table">
+              <thead>
+                <tr>
+                  <!-- <th scope="col">ID</th> -->
+                  <th scope="col">Rating</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% search.forEach(player => { %>
+  
+                <tr>
+                  <!-- <th scope=""><%= player._id %></th> -->
+                  <td><%= player.rating %></td>
+                  <td><%= player.firstName %></td>
+                  <td><%= player.lastName %></td>
+                  <td>
+                    <a
+                      href="/<%= player._id %>/remove "
+                      id="remove"
+                      class="btn btn-danger"
+                      >Remove</a
+                    >
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+
       
     <!-- Player detail -->
 

@@ -34,6 +34,7 @@ app.use(express.static('public'))
 
 let playersCheckedIn = [] //contains checked in players
 let groups = [] //contains groups of checked in players
+let groupsRR = []
 
 //
 
@@ -42,7 +43,13 @@ let groups = [] //contains groups of checked in players
 //show a list of players
 app.get('/', async (req, res) => {
     const players = await Player.find({})
-    res.render('index', { players, playersCheckedIn })
+    // const players = await Player.find({})
+    const search = await Promise.all(playersCheckedIn.map(id => Player.findById(id)))
+    //sort the players by rating (highest to lowest)
+    search.sort((a, b) => {
+        return b.rating - a.rating
+    })
+    res.render('index', { search, players, playersCheckedIn })
 })
 
 app.get('/checkedin', async (req, res) => {
@@ -80,13 +87,14 @@ app.get('/:id/remove', async (req, res) => {
         playersCheckedIn.splice(playersCheckedIn.indexOf(req.params.id), 1)
     }
     console.log(playersCheckedIn)
-    res.redirect('/checkedin')
+    res.redirect('/')
 
 })
 
 //generate groups
 app.post('/makeGroups', async (req, res) => {
     groups = [] //re-initialize groups
+    groupsRR = []
     const { numberGroups, numberPlayers } = req.body
     console.log('number of groups: ' + numberGroups)
     console.log('number of players per group: ' + numberPlayers)
@@ -109,6 +117,8 @@ app.post('/makeGroups', async (req, res) => {
             console.log(`group ${i + 1}:`)
             for (let j = 0; j < groups[i].length; j++) {
                 for (let k = j; k < groups[i].length - 1; k++) {
+                    const pair = [groups[i][j], groups[i][k + 1]] //contains the RR pair
+                    groupsRR[i].push(pair) // store the RR pair to the main groups array
                     console.log(`${groups[i][j].firstName} vs ${groups[i][k + 1].firstName}`)
                 }
             }
