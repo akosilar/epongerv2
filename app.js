@@ -108,6 +108,8 @@ app.post('/makeGroups', async (req, res) => {
         search.slice(0, numberPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
         search.splice(0, group.length) //remove the recently added players from groupPlayers
         groups.push(group) //add the group
+        groupsRR.push([]); // Initialize an empty array for each group in groupsRR
+
     }
 
     //generate round robin
