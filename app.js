@@ -34,7 +34,8 @@ app.use(express.static('public'))
 
 let playersCheckedIn = [] //contains checked in players
 let groups = [] //contains groups of checked in players
-let groupsRR = []
+let groupsRR = [] //contains groups of every pair
+let groupSchedule = [] //contains groups of every pair sorted by schedule depending on player count per group
 
 //
 
@@ -64,7 +65,7 @@ app.get('/checkedin', async (req, res) => {
 
 app.get('/groups', async (req, res) => {
     // const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
-    console.log(groups)
+    // console.log(groups)
     res.render('groups', { groups })
 })
 
@@ -112,18 +113,31 @@ app.post('/makeGroups', async (req, res) => {
 
     }
 
+
+    //RR schedule
+
+    const scheduleRR = (group, groupLength) => {
+        if (groupLength <= 3) {
+            console.log(`1vs4: ${group[2][0].firstName} vs ${group[2][1].firstName}`)
+            console.log(`2vs3: ${group[3][0].firstName} vs ${group[3][1].firstName}`)
+        }
+    }
+
     //generate round robin
     const makeRR = (groups) => {
         console.log(`Number of groups: ${groups.length}`)
+        console.log(`groupsrr length: ${groupsRR.length} groupsrr: ${groupsRR}`)
         for (let i = 0; i < groups.length; i++) {
             console.log(`group ${i + 1}:`)
             for (let j = 0; j < groups[i].length; j++) {
                 for (let k = j; k < groups[i].length - 1; k++) {
                     const pair = [groups[i][j], groups[i][k + 1]] //contains the RR pair
                     groupsRR[i].push(pair) // store the RR pair to the main groups array
-                    console.log(`${groups[i][j].firstName} vs ${groups[i][k + 1].firstName}`)
+                    // console.log(`${groupsRR[i][k][0].firstName} vs ${groupsRR[i][k][1].firstName}`)
+                    // console.log(`${groups[i][j].firstName} vs ${groups[i][k + 1].firstName}`)
                 }
             }
+            scheduleRR(groupsRR[i], groups[i].length)
         }
 
     }
