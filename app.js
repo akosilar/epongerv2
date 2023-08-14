@@ -108,18 +108,24 @@ app.post('/makeGroups', async (req, res) => {
         const group = [] //create an empty array that will hold the group of players
         search.slice(0, numberPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
         search.splice(0, group.length) //remove the recently added players from groupPlayers
-        groups.push(group) //add the group
-        groupsRR.push([]); // Initialize an empty array for each group in groupsRR
+        groups.push(group) //add the group of players
+        groupsRR.push([]); // Initialize an empty array for each group
+        groupSchedule.push([]) //Initialize an empty array for each group
 
     }
 
 
     //RR schedule
 
-    const scheduleRR = (group, groupLength) => {
-        if (groupLength <= 3) {
-            console.log(`1vs4: ${group[2][0].firstName} vs ${group[2][1].firstName}`)
-            console.log(`2vs3: ${group[3][0].firstName} vs ${group[3][1].firstName}`)
+    const scheduleRR = (group, groupLength, groupNum) => {
+        //if group has 3 players
+        if (groupLength == 3) {
+            // console.log(`1vs4: ${group[2][0].firstName} vs ${group[2][1].firstName}`)
+            // console.log(`2vs3: ${group[3][0].firstName} vs ${group[3][1].firstName}`)
+            for (let i = 3; i > 0; i--) {
+                groupSchedule[groupNum].push(group[i - 1])
+                console.log(`${group[i - 1][0].firstName} vs ${group[i - 1][1].firstName}`)
+            }
         }
     }
 
@@ -137,7 +143,7 @@ app.post('/makeGroups', async (req, res) => {
                     // console.log(`${groups[i][j].firstName} vs ${groups[i][k + 1].firstName}`)
                 }
             }
-            scheduleRR(groupsRR[i], groups[i].length)
+            scheduleRR(groupsRR[i], groups[i].length, i)
         }
 
     }
