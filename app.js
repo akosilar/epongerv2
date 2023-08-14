@@ -66,7 +66,7 @@ app.get('/checkedin', async (req, res) => {
 app.get('/groups', async (req, res) => {
     // const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
     // console.log(groups)
-    res.render('groups', { groups })
+    res.render('groups', { groups, groupSchedule })
 })
 
 app.get('/sheets', (req, res) => {
@@ -96,6 +96,7 @@ app.get('/:id/remove', async (req, res) => {
 app.post('/makeGroups', async (req, res) => {
     groups = [] //re-initialize groups
     groupsRR = []
+    groupSchedule = []
     const { numberGroups, numberPlayers } = req.body
     console.log('number of groups: ' + numberGroups)
     console.log('number of players per group: ' + numberPlayers)
@@ -124,7 +125,8 @@ app.post('/makeGroups', async (req, res) => {
             // console.log(`2vs3: ${group[3][0].firstName} vs ${group[3][1].firstName}`)
             for (let i = 3; i > 0; i--) {
                 groupSchedule[groupNum].push(group[i - 1])
-                console.log(`${group[i - 1][0].firstName} vs ${group[i - 1][1].firstName}`)
+                //print pairing
+                // console.log(`${group[i - 1][0].firstName} vs ${group[i - 1][1].firstName}`)
             }
         }
     }
@@ -148,6 +150,13 @@ app.post('/makeGroups', async (req, res) => {
 
     }
     makeRR(groups)
+
+    //iterate over groupSchedule to produce pairings in order to avoid conflicts on the table
+    // groupSchedule.forEach(group => {
+    //     group.forEach(pair => {
+    //         console.log(`${pair[0].firstName} vs ${pair[1].firstName}`)
+    //     })
+    // })
     res.redirect('/groups')
 })
 

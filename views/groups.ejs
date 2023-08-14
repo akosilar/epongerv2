@@ -18,25 +18,45 @@
     <%- include('partials/sidebar') %>
 
     <!-- Player list -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <section class="p-5 text-center-">
+        <div class="container">
+          <div class="text-center">
+            <h1>Groups</h1>
+            <a href="/sheets" id="sheets" class="btn btn-secondary btn-lg"
+              >View Sheets</a
+            >
+          </div>
+          <div>
+            <div class="row">
+              <div class="column">
+                <ul>
+                  <% if (groups.length>0) { groups.forEach((group, groupNumber) =>{ %>
+                  Group <%= groupNumber + 1 %> <%group.forEach(player => { %>
+                  <li>
+                    <%= player.firstName%> <%= player.lastName%> <%= player.rating %>
+                  </li>
+                  <% })})} %>
+                </ul>
+              </div>
+              <div class="column">
+                <ul>
 
-    <section class="p-5 text-center-">
-      <div class="container">
-        <div class="text-center">
-          <h1>Groups</h1>
-          <a href="/sheets" id="sheets" class="btn btn-secondary btn-lg"
-            >View Sheets</a
-          >
+                  <% if(groupSchedule.length>0) { groupSchedule.forEach(group => {group.forEach(pair => { %>
+                      <li>
+                        <%= pair[0].firstName%> vs <%= pair[1].firstName %>
+                        </li>
+                    
+                     <% })})}%>
+                </ul>
+              </div>
+            </div>
+          </div>
+         
         </div>
-        <ul>
-          <% if (groups.length>0) { groups.forEach((group, groupNumber) =>{ %>
-          Group <%= groupNumber + 1 %> <%group.forEach(player => { %>
-          <li>
-            <%= player.firstName%> <%= player.lastName%> <%= player.rating %>
-          </li>
-          <% })})} %>
-        </ul>
-      </div>
-    </section>
+      </section>
+    </main>
+   
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
