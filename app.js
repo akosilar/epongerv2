@@ -12,6 +12,8 @@ const player = require('./models/player')
 // const catchAsync = require('./utils/catchAsync')
 // const ExpressError = require('./utils/ExpressError')
 
+const GroupGenerator = require('./controllers/roundrobin')
+
 //local db connection
 mongoose.connect('mongodb://localhost:27017/eponger')
     .then(() => {
@@ -104,7 +106,10 @@ app.post('/makeGroups', async (req, res) => {
     search.sort((a, b) => {
         return b.rating - a.rating
     })
-    // const pc = search.map(el => el) // create a copy of checked in players.
+
+    const generator = new GroupGenerator()
+    generator.makeGroups(search, numberGroups, numberPlayers)
+
     for (let i = 1; i <= numberGroups; i++) {
         const group = [] //create an empty array that will hold the group of players
         search.slice(0, numberPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
