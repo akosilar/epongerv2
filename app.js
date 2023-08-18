@@ -108,17 +108,17 @@ app.post('/makeGroups', async (req, res) => {
     })
 
     const generator = new GroupGenerator()
-    generator.makeGroups(search, numberGroups, numberPlayers)
+    generator.makeGroups(search, numberGroups, numberPlayers, groups, groupsRR, groupSchedule)
 
-    for (let i = 1; i <= numberGroups; i++) {
-        const group = [] //create an empty array that will hold the group of players
-        search.slice(0, numberPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
-        search.splice(0, group.length) //remove the recently added players from groupPlayers
-        groups.push(group) //add the group of players
-        groupsRR.push([]); // Initialize an empty array for each group
-        groupSchedule.push([]) //Initialize an empty array for each group
+    // for (let i = 1; i <= numberGroups; i++) {
+    //     const group = [] //create an empty array that will hold the group of players
+    //     search.slice(0, numberPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
+    //     search.splice(0, group.length) //remove the recently added players from groupPlayers
+    //     groups.push(group) //add the group of players
+    //     groupsRR.push([]); // Initialize an empty array for each group
+    //     groupSchedule.push([]) //Initialize an empty array for each group
 
-    }
+    // }
 
 
     //RR schedule
