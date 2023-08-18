@@ -96,9 +96,11 @@ app.get('/:id/remove', async (req, res) => {
 
 //generate groups
 app.post('/makeGroups', async (req, res) => {
-    groups = [] //re-initialize groups
-    groupsRR = []
-    groupSchedule = []
+
+    //re-initilize arrays
+    // groups = []
+    // groupsRR = []
+    // groupSchedule = []
     const { numberGroups, numberPlayers } = req.body
     console.log('number of groups: ' + numberGroups)
     console.log('number of players per group: ' + numberPlayers)
@@ -108,17 +110,7 @@ app.post('/makeGroups', async (req, res) => {
     })
 
     const generator = new GroupGenerator()
-    generator.makeGroups(search, numberGroups, numberPlayers, groups, groupsRR, groupSchedule)
-
-    // for (let i = 1; i <= numberGroups; i++) {
-    //     const group = [] //create an empty array that will hold the group of players
-    //     search.slice(0, numberPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
-    //     search.splice(0, group.length) //remove the recently added players from groupPlayers
-    //     groups.push(group) //add the group of players
-    //     groupsRR.push([]); // Initialize an empty array for each group
-    //     groupSchedule.push([]) //Initialize an empty array for each group
-
-    // }
+    generator.makeGroups(search, numberGroups, numberPlayers, groups = [], groupsRR = [], groupSchedule = [])
 
 
     //RR schedule
@@ -154,7 +146,7 @@ app.post('/makeGroups', async (req, res) => {
         }
 
     }
-    makeRR(groups)
+    // makeRR(groups)
 
     //iterate over groupSchedule to produce pairings in order to avoid conflicts on the table
     // groupSchedule.forEach(group => {
