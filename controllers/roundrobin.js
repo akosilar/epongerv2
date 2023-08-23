@@ -38,17 +38,25 @@ class GroupGenerator {
             const middleIndex = group.length / 2;
 
             console.log('from schedulerr function')
-            console.log(group)
+            // console.log(group)
 
             this.top = group.slice(0, middleIndex)
             this.bottom = group.slice(middleIndex).reverse()
 
             for (let i = 0; i < group.length - 1; i++) {
-                console.log(i)
+
             }
 
-            for (let i = 0; i < middleIndex; i++) {
-                console.log(`${this.top[i].firstName} vs ${this.bottom[i].lastName}`)
+            for (let i = 0; i < groupLength - 1; i++) {
+                for (let i = 0; i < middleIndex; i++) {
+                    console.log(`${this.top[i].firstName} vs ${this.bottom[i].firstName}`)
+                }
+                // console.log(`${this.top[0].firstName} vs ${this.bottom[0].firstName}`)
+                // console.log(`${this.top[1].firstName} vs ${this.bottom[1].firstName}`)
+                this.bottom.push(this.top.pop())
+                // console.log(this.bottom)
+                this.top.splice(1, 0, (this.bottom.shift()))
+                // console.log(this.top)
             }
         }
     }
