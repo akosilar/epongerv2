@@ -11,7 +11,7 @@ class GroupGenerator {
             players.slice(0, numPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
             players.splice(0, group.length) //remove the recently added players from groupPlayers
             groups.push(group) //add the group of players
-            groupsRR.push([]); // Initialize an empty array for each group
+            // groupsRR.push([]); // Initialize an empty array for each group
             groupSchedule.push([]) //Initialize an empty array for each group
 
         }
@@ -29,55 +29,56 @@ class GroupGenerator {
         //         // console.log(`${group[i - 1][0].firstName} vs ${group[i - 1][1].firstName}`)
         //     }
         // }
-
-        if (groupLength % 2 == 0) {
-
-            this.top = []
-            this.bottom = []
-
-            const middleIndex = group.length / 2;
-
-            console.log('from schedulerr function')
-            // console.log(group)
-
-            this.top = group.slice(0, middleIndex)
-            this.bottom = group.slice(middleIndex).reverse()
-
-            for (let i = 0; i < group.length - 1; i++) {
-
-            }
-
-            for (let i = 0; i < groupLength - 1; i++) {
-                for (let i = 0; i < middleIndex; i++) {
-                    console.log(`${this.top[i].firstName} vs ${this.bottom[i].firstName}`)
-                }
-                // console.log(`${this.top[0].firstName} vs ${this.bottom[0].firstName}`)
-                // console.log(`${this.top[1].firstName} vs ${this.bottom[1].firstName}`)
-                this.bottom.push(this.top.pop())
-                // console.log(this.bottom)
-                this.top.splice(1, 0, (this.bottom.shift()))
-                // console.log(this.top)
-            }
+        this.top = []
+        this.bottom = []
+        const groupRR = []
+        const bye = {
+            firstName: "bye"
         }
+
+        if (groupLength % 2 != 0) {
+            group.push(bye)
+        }
+        const middleIndex = group.length / 2;
+
+
+        this.top = group.slice(0, middleIndex)
+        this.bottom = group.slice(middleIndex).reverse()
+        for (let i = 0; i < group.length - 1; i++) {
+            for (let j = 0; j < middleIndex; j++) {
+                const pair = (this.top[j].firstName == "bye" || this.bottom[j].firstName == "bye") ? ["bye"] : [this.top[j], this.bottom[j]]
+                pair != "bye" ? groupRR.push(pair) : ''
+            }
+
+            this.bottom.push(this.top.pop())
+            this.top.splice(1, 0, (this.bottom.shift()))
+
+        }
+        return groupRR
     }
 
     makeRR(groups, groupsRR) {
         console.log(`Number of groups: ${groups.length}`)
         console.log(`groupsrr length: ${groupsRR.length} groupsrr: ${groupsRR}`)
         for (let i = 0; i < groups.length; i++) {
-            console.log(`group ${i + 1}:`)
-            this.scheduleRR(groups[i], groups[i].length, i)
-            for (let j = 0; j < groups[i].length; j++) {
-                for (let k = j; k < groups[i].length - 1; k++) {
-                    const pair = [groups[i][j], groups[i][k + 1]] //contains the RR pair
-                    groupsRR[i].push(pair) // store the RR pair to the main groups array
-                    // console.log(`${groupsRR[i][k][0].firstName} vs ${groupsRR[i][k][1].firstName}`)
-                    // console.log(`${groups[i][j].firstName} vs ${groups[i][k + 1].firstName}`)
-                }
-            }
+            groupsRR.push(this.scheduleRR(groups[i], groups[i].length, i))
+            // for (let j = 0; j < groups[i].length; j++) {
+            //     for (let k = j; k < groups[i].length - 1; k++) {
+            //         const pair = [groups[i][j], groups[i][k + 1]] //contains the RR pair
+            //         groupsRR[i].push(pair) // store the RR pair to the main groups array
+            //         // console.log(`${groupsRR[i][k][0].firstName} vs ${groupsRR[i][k][1].firstName}`)
+            //         // console.log(`${groups[i][j].firstName} vs ${groups[i][k + 1].firstName}`)
+            //     }
+            // }
             // this.scheduleRR(groupsRR[i], groups[i].length, i)
         }
-
+        console.log(groupsRR)
+        groupsRR.forEach((group, i) => {
+            console.log(`group ${i + 1}:`)
+            group.forEach(pair => {
+                console.log(`${pair[0].firstName} vs ${pair[1].firstName}`)
+            })
+        });
     }
 
 
