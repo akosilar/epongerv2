@@ -68,7 +68,7 @@ app.get('/checkedin', async (req, res) => {
 app.get('/groups', async (req, res) => {
     // const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
     // console.log(groups)
-    res.render('groups', { groups, groupSchedule })
+    res.render('groups', { groups, groupsRR })
 })
 
 app.get('/sheets', (req, res) => {

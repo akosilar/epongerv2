@@ -29,7 +29,7 @@
           </div>
           <div>
             <div class="row">
-              <div class="column">
+              <div class="col-md-6">
                 <ul>
                   <% if (groups.length>0) { groups.forEach((group, groupNumber) =>{ %>
                   Group <%= groupNumber + 1 %> <%group.forEach(player => { %>
@@ -39,11 +39,13 @@
                   <% })})} %>
                 </ul>
               </div>
-              <div class="column">
+              <div class="col-md-6">
                 <ul>
 
-                  <% if(groupSchedule.length>0) { groupSchedule.forEach(group => {group.forEach(pair => { %>
-                      <li>
+                  <% if(groupsRR.length>0) { groupsRR.forEach((group,groupNumber) => {%>
+                    Group <%= groupNumber + 1 %> <%group.forEach(pair => { %>
+                      
+                    <li>
                         <%= pair[0].firstName%> vs <%= pair[1].firstName %>
                         </li>
                     
