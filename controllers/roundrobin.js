@@ -11,24 +11,11 @@ class GroupGenerator {
             players.slice(0, numPlayers).map(el => group.push(el)) //push the first numberPlayers into the empty group array
             players.splice(0, group.length) //remove the recently added players from groupPlayers
             groups.push(group) //add the group of players
-            // groupsRR.push([]); // Initialize an empty array for each group
-            groupSchedule.push([]) //Initialize an empty array for each group
-
         }
 
     }
 
-    scheduleRR(group, groupLength, groupNum) {
-        //if group has 3 players
-        // if (groupLength == 3) {
-        //     // console.log(`1vs4: ${group[2][0].firstName} vs ${group[2][1].firstName}`)
-        //     // console.log(`2vs3: ${group[3][0].firstName} vs ${group[3][1].firstName}`)
-        //     for (let i = 3; i > 0; i--) {
-        //         groupSchedule[groupNum].push(group[i - 1])
-        //         //print pairing
-        //         // console.log(`${group[i - 1][0].firstName} vs ${group[i - 1][1].firstName}`)
-        //     }
-        // }
+    scheduleRR(group) {
         this.top = []
         this.bottom = []
         const groupRR = []
@@ -36,7 +23,7 @@ class GroupGenerator {
             firstName: "bye"
         }
 
-        if (groupLength % 2 != 0) {
+        if (group.length % 2 != 0) {
             group.push(bye)
         }
         const middleIndex = group.length / 2;
@@ -72,13 +59,14 @@ class GroupGenerator {
             // }
             // this.scheduleRR(groupsRR[i], groups[i].length, i)
         }
-        console.log(groupsRR)
-        groupsRR.forEach((group, i) => {
-            console.log(`group ${i + 1}:`)
-            group.forEach(pair => {
-                console.log(`${pair[0].firstName} vs ${pair[1].firstName}`)
-            })
-        });
+        // console.log(groupsRR)
+        // groupsRR.forEach((group, i) => {
+        //     console.log(`group ${i + 1}:`)
+        //     group.forEach(pair => {
+        //         console.log(`${pair[0].firstName} vs ${pair[1].firstName}`)
+        //     })
+        // });
+
     }
 
 

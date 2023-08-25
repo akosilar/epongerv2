@@ -97,13 +97,8 @@ app.get('/:id/remove', async (req, res) => {
 //generate groups
 app.post('/makeGroups', async (req, res) => {
 
-    //re-initilize arrays
-    // groups = []
-    // groupsRR = []
-    // groupSchedule = []
+
     const { numberGroups, numberPlayers } = req.body
-    console.log('number of groups: ' + numberGroups)
-    console.log('number of players per group: ' + numberPlayers)
     const search = await Promise.all(playersCheckedIn.map(id => Player.findById(id)))
     search.sort((a, b) => {
         return b.rating - a.rating
@@ -113,48 +108,14 @@ app.post('/makeGroups', async (req, res) => {
     generator.makeGroups(search, numberGroups, numberPlayers, groups = [], groupsRR = [], groupSchedule = [])
     generator.makeRR(groups, groupsRR)
 
+    console.log(groupsRR)
+    groupsRR.forEach((group, i) => {
+        console.log(`group ${i + 1}:`)
+        group.forEach(pair => {
+            console.log(`${pair[0].firstName} vs ${pair[1].firstName}`)
+        })
+    });
 
-    //RR schedule
-
-    // const scheduleRR = (group, groupLength, groupNum) => {
-    //     //if group has 3 players
-    //     if (groupLength == 3) {
-    //         // console.log(`1vs4: ${group[2][0].firstName} vs ${group[2][1].firstName}`)
-    //         // console.log(`2vs3: ${group[3][0].firstName} vs ${group[3][1].firstName}`)
-    //         for (let i = 3; i > 0; i--) {
-    //             groupSchedule[groupNum].push(group[i - 1])
-    //             //print pairing
-    //             // console.log(`${group[i - 1][0].firstName} vs ${group[i - 1][1].firstName}`)
-    //         }
-    //     }
-    // }
-
-    //generate round robin
-    // const makeRR = (groups) => {
-    //     console.log(`Number of groups: ${groups.length}`)
-    //     console.log(`groupsrr length: ${groupsRR.length} groupsrr: ${groupsRR}`)
-    //     for (let i = 0; i < groups.length; i++) {
-    //         console.log(`group ${i + 1}:`)
-    //         for (let j = 0; j < groups[i].length; j++) {
-    //             for (let k = j; k < groups[i].length - 1; k++) {
-    //                 const pair = [groups[i][j], groups[i][k + 1]] //contains the RR pair
-    //                 groupsRR[i].push(pair) // store the RR pair to the main groups array
-    //                 // console.log(`${groupsRR[i][k][0].firstName} vs ${groupsRR[i][k][1].firstName}`)
-    //                 // console.log(`${groups[i][j].firstName} vs ${groups[i][k + 1].firstName}`)
-    //             }
-    //         }
-    //         // scheduleRR(groupsRR[i], groups[i].length, i)
-    //     }
-
-    // }
-    // makeRR(groups)
-
-    //iterate over groupSchedule to produce pairings in order to avoid conflicts on the table
-    // groupSchedule.forEach(group => {
-    //     group.forEach(pair => {
-    //         console.log(`${pair[0].firstName} vs ${pair[1].firstName}`)
-    //     })
-    // })
     res.redirect('/groups')
 })
 
