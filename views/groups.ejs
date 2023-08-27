@@ -33,7 +33,7 @@
               <% if (groups.length > 0) { %>
                 <% groups.forEach((group, groupNumber) => { %>
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link" type="button" id="group<%= groupNumber + 1 %>" data-bs-toggle="tab" data-bs-target="#group<%= groupNumber + 1 %>-tab" role="tab" aria-controls="group<%= groupNumber + 1 %>" aria-selected="false">
+                    <a class="nav-link<% if (groupNumber === 0) { %> show active <% } %>" type="button" id="group<%= groupNumber + 1 %>" data-bs-toggle="tab" data-bs-target="#group<%= groupNumber + 1 %>-tab" role="tab" aria-controls="group<%= groupNumber + 1 %>" aria-selected="false">
                       Group <%= groupNumber + 1 %>
                     </a>
                   </li>
@@ -44,7 +44,7 @@
               <!-- Tab content goes here -->
               <% if (groups.length > 0) { %>
                 <% groups.forEach((group, groupNumber) => { %>
-                  <div class="tab-pane fade" id="group<%= groupNumber + 1 %>-tab" role="tabpanel" tabindex="0">
+                  <div class="tab-pane fade <% if (groupNumber === 0) { %> show active <% } %>" id="group<%= groupNumber + 1 %>-tab" role="tabpanel" tabindex="0">
                     <ul>
                       <% group.forEach(player => { %>
                         <li>
