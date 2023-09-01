@@ -28,13 +28,13 @@
             >
           </div>
 
-          <div class="col-md-6">
+          <div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <% if (groups.length > 0) { %>
                 <% groups.forEach((group, groupNumber) => { %>
                   <li class="nav-item" role="presentation">
                     <a class="nav-link<% if (groupNumber === 0) { %> show active <% } %>" type="button" id="group<%= groupNumber + 1 %>" data-bs-toggle="tab" data-bs-target="#group<%= groupNumber + 1 %>-tab" role="tab" aria-controls="group<%= groupNumber + 1 %>" aria-selected="false">
-                      Group <%= groupNumber + 1 %>
+                      Group <%= groupNumber + 1 %> <span class="badge bg-primary rounded-pill"><%= group.length %></span>
                     </a>
                   </li>
                 <% }) %>
@@ -45,9 +45,9 @@
               <% if (groups.length > 0) { %>
                 <% groups.forEach((group, groupNumber) => { %>
                   <div class="tab-pane fade <% if (groupNumber === 0) { %> show active <% } %>" id="group<%= groupNumber + 1 %>-tab" role="tabpanel" tabindex="0">
-                    <div class="row">
-                      <div class="col-md-6">
-                    <ul class="list-group">
+                    
+
+                    <ul class="list-group-flush">
                       <h3>Players</h3>
                       <% group.forEach(player => { %>
                         <li class="list-group-item">
@@ -55,16 +55,24 @@
                         </li>
                       <% }) %>
                     </ul>
-                    </div>
-                    <div class="col-md-6">
-                    <ul class="list-group">
-                      <h3>Pairings</h3>
-                      <% groupsRR[groupNumber].forEach(pair =>{%>
-                        <li class="list-group-item"><%= pair[0].firstName%> vs <%= pair[1].firstName%></li>
-                     <% })%>
+
+                    
+                    
+                    <ul class="list-group-flush">
+                      <li class="list-group-item">
+                        <h3>Pairings <span class="badge bg-primary rounded-pill"><%= groupsRR[groupNumber].length %></span></h3>
+                      </li>
+                    
+                      <% groupsRR[groupNumber].forEach(pair => { %>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <%= pair[0].firstName %> vs <%= pair[1].firstName %>
+                          <div class="d-flex">
+                            <input type="number" class="form-control form-control-sm me-2" placeholder="Score 1">
+                            <input type="number" class="form-control form-control-sm" placeholder="Score 2">
+                          </div>
+                        </li>
+                      <% }) %>
                     </ul>
-                    </div>
-                  </div>
                   </div>
                 <% }) %>
               <% } %>
