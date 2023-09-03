@@ -5,6 +5,7 @@ const app = express()
 const path = require('path')
 const ejsMate = require('ejs-mate')
 const Player = require('./models/player')
+const Matches = require('./models/match')
 // const groupPlayers = require('./public/group')
 const { func } = require('joi')
 const { group } = require('console')
@@ -69,6 +70,12 @@ app.get('/groups', async (req, res) => {
     // const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
     // console.log(groups)
     res.render('groups', { groups, groupsRR })
+})
+
+app.get('/matches', async (req, res) => {
+    const matches = await Matches.find({})
+
+    res.render('matches', { matches })
 })
 
 app.get('/sheets', (req, res) => {
