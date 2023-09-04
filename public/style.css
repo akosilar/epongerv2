@@ -4,6 +4,16 @@
 
 /* spacing */
 
+.players {
+    max-height: 300px;
+
+}
+
+.playersCheckedIn {
+    max-height: 300px;
+
+
+}
 
 thead th {
     border-bottom: solid;
