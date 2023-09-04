@@ -15,9 +15,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <%- include('partials/navbar') %>
+
+        <%- include('partials/sidebar') %> 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="p-5 d-flex">
-        <%- include('partials/sidebar') %> 
+    
         <div class="text-center">
           <!-- Main content here -->
           <h1>Sheets</h1>
@@ -297,5 +300,9 @@
       integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
   </body>
 </html>
