@@ -15,6 +15,7 @@
   </head>
   <body>
     <!-- navbar -->
+    <%- include('partials/navbar') %>
     <%- include('partials/sidebar') %>
 
     <!-- Player list -->
@@ -26,34 +27,45 @@
         </div>
 
         <!-- group prompt -->
-        <div class="">
-          Checked in: <%= playersCheckedIn.length %>
-          <form action="/makeGroups" method="post">
-            <div>
-              <label for="numberGroups">Number of Groups?</label>
-              <input
-                type="number"
-                name="numberGroups"
-                id="numberGroups"
-                placeholder="3"
-                required
-              />
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  Checked in: <%= playersCheckedIn.length %>
+                </div>
+                <div class="card-body">
+                  <form action="/makeGroups" method="post">
+                    <div class="mb-3">
+                      <label for="numberGroups" class="form-label">Number of Groups?</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="numberGroups"
+                        id="numberGroups"
+                        placeholder="3"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="numberPlayers" class="form-label">Number of Players per Group?</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="numberPlayers"
+                        id="numberPlayers"
+                        placeholder="4"
+                        required
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Generate Groups</button>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div>
-              <label for="numberGroups">Number of Players per Group?</label>
-              <input
-                type="number"
-                name="numberPlayers"
-                id="numberPlayers"
-                placeholder="4"
-                required
-              />
-            </div>
-            <div>
-              <button>Generate Groups</button>
-            </div>
-          </form>
+          </div>
         </div>
+        
         <!-- checked in players -->
         <div class="table-responsive" style="max-height: 500px;" >
           <table class="table table-hover table-sm table-striped">
@@ -102,5 +114,10 @@
       integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <script>
+      feather.replace()
+    </script>
   </body>
 </html>
