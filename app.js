@@ -72,6 +72,7 @@ app.get('/groups', async (req, res) => {
     res.render('groups', { groups, groupsRR })
 })
 
+//display matches
 app.get('/matches', async (req, res) => {
     const matches = await Match.find({})
         .populate('p1_id', 'firstName lastName')
@@ -103,6 +104,7 @@ app.get('/:id/remove', async (req, res) => {
     res.redirect('/')
 
 })
+
 
 //generate groups
 app.post('/makeGroups', async (req, res) => {
@@ -142,7 +144,11 @@ app.post('/', async (req, res) => {
     res.redirect('/')
 })
 
-
+app.delete('/matches/:id', async (req, res) => {
+    const { id } = req.params
+    await Match.findByIdAndDelete(id)
+    res.redirect('/matches')
+})
 
 app.delete('/:id', async (req, res) => {
     const { id } = req.params
