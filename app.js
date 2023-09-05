@@ -5,7 +5,7 @@ const app = express()
 const path = require('path')
 const ejsMate = require('ejs-mate')
 const Player = require('./models/player')
-const Matches = require('./models/match')
+const Match = require('./models/match')
 // const groupPlayers = require('./public/group')
 const { func } = require('joi')
 const { group } = require('console')
@@ -73,9 +73,12 @@ app.get('/groups', async (req, res) => {
 })
 
 app.get('/matches', async (req, res) => {
-    const matches = await Matches.find({})
+    const matches = await Match.find({})
+        .populate('p1_id', 'firstName lastName')
+        .populate('p2_id', 'firstName lastName');
+    const players = await Player.find({})
 
-    res.render('matches', { matches })
+    res.render('matches', { matches, players })
 })
 
 app.get('/sheets', (req, res) => {
@@ -126,7 +129,11 @@ app.post('/makeGroups', async (req, res) => {
     res.redirect('/groups')
 })
 
-
+app.post('/addMatch', async (req, res) => {
+    const match = new Match(req.body.match)
+    await match.save()
+    res.redirect('/matches')
+})
 
 //add new player
 app.post('/', async (req, res) => {
@@ -134,6 +141,8 @@ app.post('/', async (req, res) => {
     await player.save()
     res.redirect('/')
 })
+
+
 
 app.delete('/:id', async (req, res) => {
     const { id } = req.params

@@ -7,11 +7,11 @@ const MatchSchema = new Schema({
     p2_score: String,
     p1_id: {
         type: Schema.Types.ObjectId,
-        ref: 'player'
+        ref: 'Player'
     },
     p2_id: {
         type: Schema.Types.ObjectId,
-        ref: 'player'
+        ref: 'Player'
     },
     matchDate: Date
 })

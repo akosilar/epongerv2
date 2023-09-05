@@ -1,18 +1,23 @@
 <!-- Modal -->
-<div class="modal fade match-modal-<%= modalId %>" id="w<%= modalId %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <%= p1 %> vs <%= p2 %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+<div class="modal fade match-modal-<%= match._id %>" id="w<%= match._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Match Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Match ID:</strong> <%= match._id %></p>
+        <p><strong>Player 1:</strong> <%= match.p1_id.firstName %> <%= match.p1_id.lastName %></p>
+        <p><strong>Player 2:</strong> <%= match.p2_id.firstName %> <%= match.p2_id.lastName %></p>
+        <p><strong>Player 1 Score:</strong> <%= match.p1_score %></p>
+        <p><strong>Player 2 Score:</strong> <%= match.p2_score %></p>
+        <p><strong>Date:</strong> <%= match.date %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
+</div>
