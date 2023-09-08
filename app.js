@@ -4,6 +4,7 @@ const methodOverride = require('method-override')
 const app = express()
 const path = require('path')
 const ejsMate = require('ejs-mate')
+const moment = require('moment-timezone')
 const Player = require('./models/player')
 const Match = require('./models/match')
 // const groupPlayers = require('./public/group')
@@ -76,10 +77,17 @@ app.get('/groups', async (req, res) => {
 app.get('/matches', async (req, res) => {
     const matches = await Match.find({})
         .populate('p1_id', 'firstName lastName')
-        .populate('p2_id', 'firstName lastName');
+        .populate('p2_id', 'firstName lastName')
     const players = await Player.find({})
 
     res.render('matches', { matches, players })
+})
+
+app.get('/scores', async (req, res) => {
+    const matches = await Match.find({})
+        .populate('p1_id', 'firstName lastName')
+        .populate('p2_id', 'firstName lastName');
+    res.render('scores', { matches, groups, groupsRR })
 })
 
 app.get('/sheets', (req, res) => {
@@ -131,8 +139,53 @@ app.post('/makeGroups', async (req, res) => {
     res.redirect('/groups')
 })
 
+app.post('/scores', async (req, res) => {
+    console.log(moment.tz(req.body.matchDate, 'America/New_York').utc().toDate())
+    try {
+        for (let i = 0; i < groupsRR.length; i++) {
+            const group = groupsRR[i];
+            for (let j = 0; j < group.length; j++) {
+                const pair = group[j];
+                const match = new Match({
+                    p1_id: pair[0].id,
+                    p2_id: pair[1].id,
+                    group: i + 1,
+                    matchDate: (moment.tz(req.body.matchDate, 'America/New_York').utc().toDate())
+                });
+                await match.save();
+            }
+        }
+        res.redirect('/scores');
+    } catch (error) {
+        console.error('Error saving matches:', error);
+        // Handle the error appropriately
+        res.status(500).send('Error saving matches');
+    }
+});
+
+
+
+// app.post('/scores', async (req, res) => {
+//     console.log(req.body.matchDate)
+//     groupsRR.forEach((group, i) => {
+//         group.forEach(pair => {
+//             const match = new Match({
+//                 p1_id: pair[0].id,
+//                 p2_id: pair[1].id,
+//                 group: i + 1,
+//                 matchDate: req.body.matchDate
+
+//             })
+//             await match.save()
+
+//         })
+//     })
+//     res.redirect('/groups')
+// })
+
 app.post('/addMatch', async (req, res) => {
     const match = new Match(req.body.match)
+    console.log(match)
     await match.save()
     res.redirect('/matches')
 })

@@ -13,6 +13,7 @@ const MatchSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Player'
     },
+    group: Number,
     matchDate: Date
 })
 

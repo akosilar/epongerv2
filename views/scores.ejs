@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Groups</title>
+    <title>Scores</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -24,41 +24,10 @@
       <section class="p-5">
         <div class="container">
           <div class="text-center mb-4">
-            <h1>Groups</h1>
+            <h1>Scores</h1>
           </div>
 
           
-
-          <div class="container mt-5">
-            <div class="row justify-content-center">
-              <div class="col-md-6">
-                <div class="card">
-                  <div class="card-header">
-                    Card Header
-                  </div>
-                  <div class="card-body">
-                    <form action="/scores" method="post">
-                      
-                      <div class="mb-3">
-                        <label for="matchDate" class="form-label">Match Date</label>
-                        <input
-                          type="date"
-                          class="form-control"
-                          name="matchDate"
-                          id="match[matchDate]"
-                          placeholder=""
-                          required
-                        />
-                      </div>
-                      
-                      <button type="submit" class="btn btn-primary">Start League</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-    
           <div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <% if (groups.length > 0) { %>
@@ -76,24 +45,18 @@
               <% if (groups.length > 0) { %>
                 <% groups.forEach((group, groupNumber) => { %>
                   <div class="tab-pane fade<% if (groupNumber === 0) { %> show active <% } %>" id="group<%= groupNumber + 1 %>-tab" role="tabpanel" tabindex="0">
-                    <div class="mb-4 col-md-3">
-                      <h3>Players</h3>
-                      <ul class="list-group">
-                        <% group.forEach(player => { %>
-                          <li class="list-group-item">
-                            <%= player.firstName %> <%= player.lastName %> (Rating: <%= player.rating %>)
-                          </li>
-                        <% }) %>
-                      </ul>
-                    </div>
+                   
     
-                    <div class="pairings col-md-3" >
+                    <div class="pairings" >
                       <h3>Pairings <span class="badge bg-primary rounded-pill"><%= groupsRR[groupNumber].length %></span></h3>
                       <ul class="list-group">
                         <% groupsRR[groupNumber].forEach(pair => { %>
                           <li class="list-group-item d-flex justify-content-between align-items-center">
                             <%= pair[0].firstName %> vs <%= pair[1].firstName %>
-                            
+                            <div class="d-flex scores" ">
+                              <input type="number" class="form-control form-control-sm me-2" placeholder="Score 1">
+                              <input type="number" class="form-control form-control-sm" placeholder="Score 2">
+                            </div>
                           </li>
                         <% }) %>
                       </ul>

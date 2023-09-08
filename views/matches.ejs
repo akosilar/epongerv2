@@ -29,6 +29,28 @@
 
           <form method="post" action="/addMatch">
             <div class="row">
+              <div class="mb-3">
+                <label for="matchDate" class="form-label">Match Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="match[matchDate]""
+                  id="matchDate"
+                  placeholder=""
+                  required
+                />
+                <div class="mb-3 col-md-3">
+                  <label for="group" class="form-label">Group</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="match[group]"
+                    id="number"
+                    placeholder=""
+                    required
+                  />
+                </div>
+              </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="player1Select">Select Player 1:</label>
@@ -79,6 +101,7 @@
                   <th>Match ID</th>
                   <th>Player 1</th>
                   <th>Player 2</th>
+                  <th>Group</th>
                   <th>Date</th>
                 </tr>
               </thead>
@@ -91,7 +114,8 @@
                     <td><%= match._id %></td>
                     <td><%= match.p1_id.firstName %> <%= match.p1_id.lastName %></td>
                     <td><%= match.p2_id.firstName %> <%= match.p2_id.lastName %></td>
-                    <td><%= match.date %></td>
+                    <td><%= match.group %></td>
+                    <td><%= (new Date(match.matchDate)).getMonth() +1%>/<%= (new Date(match.matchDate)).getDate() %>/<%= (new Date(match.matchDate)).getFullYear() %> </td>
                   </tr>
                 <% }) %>
               </tbody>
