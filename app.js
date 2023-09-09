@@ -84,9 +84,7 @@ app.get('/matches', async (req, res) => {
 })
 
 app.get('/scores', async (req, res) => {
-    // console.log(req.query.matchDate)
-    const targetDate = req.query.matchDate ? (new Date(req.query.matchDate)) : null
-    console.log(targetDate ? 'run' : 'all results')
+    const targetDate = req.query.matchDate ? (new Date(req.query.matchDate)) : new Date((new Date()).setHours(0, 0, 0, 0))
     const matches = await Match.find(targetDate ? {
         matchDate: {
             $gte: targetDate,
@@ -95,7 +93,7 @@ app.get('/scores', async (req, res) => {
     } : {})
         .populate('p1_id', 'firstName lastName')
         .populate('p2_id', 'firstName lastName');
-    res.render('scores', { matches, groups, groupsRR })
+    res.render('scores', { matches, targetDate, groups, groupsRR })
 })
 
 app.get('/sheets', (req, res) => {

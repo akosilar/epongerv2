@@ -27,11 +27,29 @@
             <h1>Scores</h1>
           </div>
       
-          
+          <div class="container mt-5 mb-3">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Enter a Date
+                        </div>
+                        <div class="card-body">
+                            <form action="/scores" method="post">
+                                <div class="form-group">
+                                    <label for="dateInput">Select a Date:</label>
+                                    <input type="date" class="form-control" id="match[matchDate]" name="matchDate" value="<%= targetDate.toISOString().split('T')[0] %>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-          <div class="pairings">
-
-            
+          <div class="matches">
+        
             <!-- Create a tab navigation for the groups -->
             <ul class="nav nav-tabs" id="groupTabs" role="tablist">
               <% const uniqueGroups = [...new Set(matches.map(match => match.group))]; %>
