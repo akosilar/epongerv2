@@ -3,37 +3,37 @@
   <div class="position-sticky pt-3 sidebar-sticky">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">
+        <a class="nav-link " aria-current="page" href="#">
           <span data-feather="home" class="align-text-bottom"></span>
           Dashboard
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link <%= pageName === "players" ? "active" : '' %>" href="/">
           <span data-feather="users" class="align-text-bottom"></span>
           Players
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="sheets">
+        <a class="nav-link <%= pageName === "sheets" ? "active" : '' %>" href="sheets">
           <span data-feather="file" class="align-text-bottom"></span>
           Sheets
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="groups">
+        <a class="nav-link <%= pageName === "groups" ? "active" : '' %>" href="groups">
           <span data-feather="users" class="align-text-bottom"></span>
           Groups
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="matches">
+        <a class="nav-link <%= pageName === "matches" ? "active" : '' %>" href="matches">
           <span data-feather="bar-chart-2" class="align-text-bottom"></span>
           Matches
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="scores">
+        <a class="nav-link <%= pageName === "scores" ? "active" : '' %>" href="scores">
           <span data-feather="layers" class="align-text-bottom"></span>
           Scores
         </a>

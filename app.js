@@ -54,7 +54,7 @@ app.get('/', async (req, res) => {
     search.sort((a, b) => {
         return b.rating - a.rating
     })
-    res.render('index', { search, players, playersCheckedIn })
+    res.render('index', { search, players, playersCheckedIn, pageName: "players" })
 })
 
 app.get('/checkedin', async (req, res) => {
@@ -70,7 +70,7 @@ app.get('/checkedin', async (req, res) => {
 app.get('/groups', async (req, res) => {
     // const search = await Promise.all(groups.map(group => Promise.all(group.map(id => Player.findById(id)))))
     // console.log(groups)
-    res.render('groups', { groups, groupsRR })
+    res.render('groups', { groups, groupsRR, pageName: 'groups' })
 })
 
 //display matches
@@ -80,7 +80,7 @@ app.get('/matches', async (req, res) => {
         .populate('p2_id', 'firstName lastName')
     const players = await Player.find({})
 
-    res.render('matches', { matches, players })
+    res.render('matches', { matches, players, pageName: 'matches' })
 })
 
 app.get('/scores', async (req, res) => {
@@ -91,13 +91,13 @@ app.get('/scores', async (req, res) => {
             $lt: new Date(targetDate.getTime() + 24 * 60 * 60 * 1000)
         }
     } : {})
-        .populate('p1_id', 'firstName lastName')
-        .populate('p2_id', 'firstName lastName');
-    res.render('scores', { matches, targetDate, groups, groupsRR })
+        .populate('p1_id', 'firstName lastName rating')
+        .populate('p2_id', 'firstName lastName rating');
+    res.render('scores', { matches, targetDate, pageName: 'scores' })
 })
 
 app.get('/sheets', (req, res) => {
-    res.render('sheets', { groups })
+    res.render('sheets', { groups, pageName: "sheets" })
 })
 
 //check in player which adds the player to playersCheckedIn
