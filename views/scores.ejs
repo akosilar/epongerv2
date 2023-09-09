@@ -26,47 +26,59 @@
           <div class="text-center mb-4">
             <h1>Scores</h1>
           </div>
-
+      
           
-          <div>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <% if (groups.length > 0) { %>
-                <% groups.forEach((group, groupNumber) => { %>
-                  <li class="nav-item" role="presentation">
-                    <a class="nav-link<% if (groupNumber === 0) { %> active <% } %>" type="button" id="group<%= groupNumber + 1 %>" data-bs-toggle="tab" data-bs-target="#group<%= groupNumber + 1 %>-tab" role="tab" aria-controls="group<%= groupNumber + 1 %>" aria-selected="false">
-                      Group <%= groupNumber + 1 %> <span class="badge bg-primary rounded-pill"><%= group.length %></span>
-                    </a>
-                  </li>
-                <% }) %>
-              <% } %>
+
+          <div class="pairings">
+
+            
+            <!-- Create a tab navigation for the groups -->
+            <ul class="nav nav-tabs" id="groupTabs" role="tablist">
+              <% const uniqueGroups = [...new Set(matches.map(match => match.group))]; %>
+              <% uniqueGroups.forEach((group, index) => { %>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link <%= index === 0 ? 'active' : '' %>" type="button" id="group<%= group %>" data-bs-toggle="tab" data-bs-target="#group<%= group%>Tab" role="tab" aria-controls="group<%= group %>" aria-selected="<%= index === 0 %>">
+                    Group <%= group %>
+                  </a>
+                </li>
+              <% }) %>
             </ul>
-            <div class="tab-content" id="myTabContent">
-              <!-- Tab content goes here -->
-              <% if (groups.length > 0) { %>
-                <% groups.forEach((group, groupNumber) => { %>
-                  <div class="tab-pane fade<% if (groupNumber === 0) { %> show active <% } %>" id="group<%= groupNumber + 1 %>-tab" role="tabpanel" tabindex="0">
-                   
-    
-                    <div class="pairings" >
-                      <h3>Pairings <span class="badge bg-primary rounded-pill"><%= groupsRR[groupNumber].length %></span></h3>
-                      <ul class="list-group">
-                        <% groupsRR[groupNumber].forEach(pair => { %>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <%= pair[0].firstName %> vs <%= pair[1].firstName %>
-                            <div class="d-flex scores" ">
-                              <input type="number" class="form-control form-control-sm me-2" placeholder="Score 1">
-                              <input type="number" class="form-control form-control-sm" placeholder="Score 2">
-                            </div>
-                          </li>
-                        <% }) %>
-                      </ul>
+            
+            <div class="tab-content" id="groupTabsContent">
+              <% uniqueGroups.forEach((group, index) => { %>
+                <div class="tab-pane fade <%= index === 0 ? 'show active' : '' %>" id="group<%= group %>Tab" role="tabpanel" aria-labelledby="group<%= group %>Tab">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <% const groupMatches = matches.filter(match => match.group === group); %>
+                      <% groupMatches.forEach((match) => { %>
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <%= match.matchDate %>
+                              <th>Player</th>
+                              <th class="col-sm-2">Score</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><%= match.p1_id.firstName %> <%= match.p1_id.lastName %></td>
+                              <td><input type="number" class="form-control form-control-sm" value="<%= match.p1_score %>"></td>
+                            </tr>
+                            <tr>
+                              <td><%= match.p2_id.firstName %> <%= match.p2_id.lastName %></td>
+                              <td><input type="number" class="form-control form-control-sm" value="<%= match.p2_score %>"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      <% }) %>
                     </div>
                   </div>
-                <% }) %>
-              <% } %>
+                </div>
+              <% }) %>
             </div>
           </div>
-        </div>
+          
+         
       </section>
     </main>
     

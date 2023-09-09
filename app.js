@@ -84,7 +84,15 @@ app.get('/matches', async (req, res) => {
 })
 
 app.get('/scores', async (req, res) => {
-    const matches = await Match.find({})
+    // console.log(req.query.matchDate)
+    const targetDate = req.query.matchDate ? (new Date(req.query.matchDate)) : null
+    console.log(targetDate ? 'run' : 'all results')
+    const matches = await Match.find(targetDate ? {
+        matchDate: {
+            $gte: targetDate,
+            $lt: new Date(targetDate.getTime() + 24 * 60 * 60 * 1000)
+        }
+    } : {})
         .populate('p1_id', 'firstName lastName')
         .populate('p2_id', 'firstName lastName');
     res.render('scores', { matches, groups, groupsRR })
@@ -140,7 +148,7 @@ app.post('/makeGroups', async (req, res) => {
 })
 
 app.post('/scores', async (req, res) => {
-    console.log(moment.tz(req.body.matchDate, 'America/New_York').utc().toDate())
+    matchDate = (moment.tz(req.body.matchDate, 'America/New_York').utc().toDate())
     try {
         for (let i = 0; i < groupsRR.length; i++) {
             const group = groupsRR[i];
@@ -150,12 +158,12 @@ app.post('/scores', async (req, res) => {
                     p1_id: pair[0].id,
                     p2_id: pair[1].id,
                     group: i + 1,
-                    matchDate: (moment.tz(req.body.matchDate, 'America/New_York').utc().toDate())
+                    matchDate: (matchDate)
                 });
                 await match.save();
             }
         }
-        res.redirect('/scores');
+        res.redirect(`/scores?matchDate=${matchDate}`);
     } catch (error) {
         console.error('Error saving matches:', error);
         // Handle the error appropriately
