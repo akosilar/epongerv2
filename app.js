@@ -64,7 +64,7 @@ app.get('/checkedin', async (req, res) => {
     search.sort((a, b) => {
         return b.rating - a.rating
     })
-    res.render('checkedin', { search, playersCheckedIn })
+    res.render('checkedin', { search, playersCheckedIn, pageName: "checkedin" })
 })
 
 app.get('/groups', async (req, res) => {

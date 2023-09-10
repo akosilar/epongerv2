@@ -15,6 +15,10 @@
 
 }
 
+.card {
+    width: 18rem;
+}
+
 thead th {
     border-bottom: solid;
     width: 500px;
