@@ -35,8 +35,8 @@
           >
             Register New Player
           </button>
-          <a href="/checkedin" id="checkedin" class="btn btn-info btn-lg"
-            >View Checked In <span class="badge bg-primary rounded-pill"><%= playersCheckedIn.length %></span></a
+          <a href="/checkedin" id="checkedin" class="btn btn-info btn-lg" <%= playersCheckedIn.length > 0 ? '' : 'hidden' %>
+            >View Checked In  <span class="badge bg-primary rounded-pill"><%= playersCheckedIn.length %></span> </a
           >
         </div>
       </div>

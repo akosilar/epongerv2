@@ -117,7 +117,7 @@ app.get('/:id/remove', async (req, res) => {
     if (playersCheckedIn.includes(req.params.id)) {
         playersCheckedIn.splice(playersCheckedIn.indexOf(req.params.id), 1)
     }
-    console.log(playersCheckedIn)
+    // console.log(playersCheckedIn)
     res.redirect('/')
 
 })
