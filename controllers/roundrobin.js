@@ -3,7 +3,7 @@ class GroupGenerator {
     }
 
     makeGroups(players, numGroups, numPlayers, groups, groupsRR, groupSchedule) {
-        console.log('this came from the class')
+        // console.log('this came from the class')
 
 
         for (let i = 1; i <= numGroups; i++) {
@@ -45,8 +45,8 @@ class GroupGenerator {
     }
 
     makeRR(groups, groupsRR) {
-        console.log(`Number of groups: ${groups.length}`)
-        console.log(`groupsrr length: ${groupsRR.length} groupsrr: ${groupsRR}`)
+        // console.log(`Number of groups: ${groups.length}`)
+        // console.log(`groupsrr length: ${groupsRR.length} groupsrr: ${groupsRR}`)
         for (let i = 0; i < groups.length; i++) {
             groupsRR.push(this.scheduleRR(groups[i], groups[i].length, i))
             // for (let j = 0; j < groups[i].length; j++) {

@@ -79,11 +79,14 @@ app.get('/matches', async (req, res) => {
         .populate('p1_id', 'firstName lastName')
         .populate('p2_id', 'firstName lastName')
     const players = await Player.find({})
-
+    matches.sort((a, b) => {
+        return b.matchDate - a.matchDate
+    })
     res.render('matches', { matches, players, pageName: 'matches' })
 })
 
 app.get('/scores', async (req, res) => {
+
     const targetDate = req.query.matchDate ? (new Date(req.query.matchDate)) : new Date((new Date()).setHours(0, 0, 0, 0))
     const matches = await Match.find(targetDate ? {
         matchDate: {
@@ -105,7 +108,7 @@ app.get('/:id/checkin', (req, res) => {
     if (!playersCheckedIn.includes(req.params.id)) {
         playersCheckedIn.push(req.params.id)
     }
-    console.log(playersCheckedIn)
+    // console.log(playersCheckedIn)
     res.redirect('/')
 })
 
@@ -134,60 +137,67 @@ app.post('/makeGroups', async (req, res) => {
     generator.makeGroups(search, numberGroups, numberPlayers, groups = [], groupsRR = [], groupSchedule = [])
     generator.makeRR(groups, groupsRR)
 
-    console.log(groupsRR)
-    groupsRR.forEach((group, i) => {
-        console.log(`group ${i + 1}:`)
-        group.forEach(pair => {
-            console.log(`${pair[0].firstName} vs ${pair[1].firstName}`)
-        })
-    });
+    // console.log(groupsRR)
+    // groupsRR.forEach((group, i) => {
+    //     console.log(`group ${i + 1}:`)
+    //     group.forEach(pair => {
+    //         console.log(`${pair[0].firstName} vs ${pair[1].firstName}`)
+    //     })
+    // });
 
     res.redirect('/groups')
 })
 
 app.post('/scores', async (req, res) => {
-    matchDate = (moment.tz(req.body.matchDate, 'America/New_York').utc().toDate())
-    try {
-        for (let i = 0; i < groupsRR.length; i++) {
-            const group = groupsRR[i];
-            for (let j = 0; j < group.length; j++) {
-                const pair = group[j];
-                const match = new Match({
-                    p1_id: pair[0].id,
-                    p2_id: pair[1].id,
-                    group: i + 1,
-                    matchDate: (matchDate)
-                });
-                await match.save();
-            }
+    const { match } = req.body
+
+
+    for (const matchId in match) {
+        if (match.hasOwnProperty(matchId)) {
+            const { p1_score, p2_score } = match[matchId];
+
+            // Update the Match document in the database with the new scores
+            await Match.findByIdAndUpdate(matchId, { p1_score, p2_score });
         }
-        res.redirect(`/scores?matchDate=${matchDate}`);
-    } catch (error) {
-        console.error('Error saving matches:', error);
-        // Handle the error appropriately
-        res.status(500).send('Error saving matches');
     }
+
+
+    //acquire the first match, and pass the matchDate on the redirect
+    const firstMatch = await Match.findById(Object.keys(match)[0])
+
+    res.redirect(`/scores?matchDate=${firstMatch.matchDate}`);
+
 });
 
 
 
-// app.post('/scores', async (req, res) => {
-//     console.log(req.body.matchDate)
-//     groupsRR.forEach((group, i) => {
-//         group.forEach(pair => {
-//             const match = new Match({
-//                 p1_id: pair[0].id,
-//                 p2_id: pair[1].id,
-//                 group: i + 1,
-//                 matchDate: req.body.matchDate
+app.post('/inputMatches', async (req, res) => {
 
-//             })
-//             await match.save()
 
-//         })
-//     })
-//     res.redirect('/groups')
-// })
+    try {
+        for (let i = 0; i < groupsRR.length; i++) {
+            const group = groupsRR[i];
+
+            for (const pair of group) {
+                const match = new Match({
+                    p1_id: pair[0].id,
+                    p2_id: pair[1].id,
+                    group: i + 1,
+                    matchDate: moment.tz(req.body.matchDate, 'America/New_York').utc().toDate()
+                });
+
+                await match.save();
+            }
+        }
+
+        res.redirect(`/scores?matchDate=${req.body.matchDate}`);
+    } catch (error) {
+        // Handle errors here, e.g., log the error and send an error response
+        console.error(error);
+        res.status(500).send('An error occurred while saving matches.');
+    }
+});
+
 
 app.post('/addMatch', async (req, res) => {
     const match = new Match(req.body.match)

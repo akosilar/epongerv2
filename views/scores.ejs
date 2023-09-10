@@ -31,9 +31,6 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">
-                            Enter a Date
-                        </div>
                         <div class="card-body">
                             <form action="/scores" method="get" id="dateForm">
                                 <div class="form-group">
@@ -52,6 +49,7 @@
         
             <!-- Create a tab navigation for the groups -->
             <ul class="nav nav-tabs" id="groupTabs" role="tablist">
+
               <% const uniqueGroups = [...new Set(matches.map(match => match.group))]; %>
               <% uniqueGroups.forEach((group, index) => { %>
                 <li class="nav-item" role="presentation">
@@ -67,13 +65,18 @@
                 <div class="tab-pane fade <%= index === 0 ? 'show active' : '' %>" id="group<%= group %>Tab" role="tabpanel" aria-labelledby="group<%= group %>Tab">
                   <div class="row">
                     <div class="col-md-5">
-                      <form action="">
+                      <form action="/scores" method="post">
+
                       <% const groupMatches = matches.filter(match => match.group === group); %>
                       <% groupMatches.forEach((match) => { %>
+
+
                         <table class="table table-bordered">
                           <thead>
                             <tr>
                               <%= match.matchDate %>
+                              <%= match._id %>
+
                               <th>Player</th>
                               <th class="col-sm-2">Score</th>
                             </tr>
@@ -81,15 +84,24 @@
                           <tbody>
                             <tr>
                               <td><%= match.p1_id.firstName %> <%= match.p1_id.lastName %> - <%= match.p1_id.rating %></td>
-                              <td><input type="number" class="form-control form-control-sm" value="<%= match.p1_score %>" name="match[p1_score]"></td>
+                              <td><input type="number" class="form-control form-control-sm" value="<%= match.p1_score %>" name="match[<%= match._id %>][p1_score]"></td>
+
+
+
+
                             </tr>
                             <tr>
                               <td><%= match.p2_id.firstName %> <%= match.p2_id.lastName %> - <%= match.p2_id.rating%></td>
-                              <td><input type="number" class="form-control form-control-sm" value="<%= match.p2_score %>" name="match[p2_score]"></td>
+                              <td><input type="number" class="form-control form-control-sm" value="<%= match.p2_score %>" name="match[<%= match._id %>][p2_score]"></td>
+
+
                             </tr>
                           </tbody>
                         </table>
                       <% }) %>
+
+                        <button class="btn btn-primary">Submit Scores</button>
+
                       </form>
                     </div>
                   </div>

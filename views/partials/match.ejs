@@ -3,11 +3,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Match Details</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Match <%= match._id %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p><strong>Match ID:</strong> <%= match._id %></p>
+
         <p><strong>Player 1:</strong> <%= match.p1_id.firstName %> <%= match.p1_id.lastName %></p>
         <p><strong>Player 2:</strong> <%= match.p2_id.firstName %> <%= match.p2_id.lastName %></p>
         <p><strong>Player 1 Score:</strong> <%= match.p1_score %></p>

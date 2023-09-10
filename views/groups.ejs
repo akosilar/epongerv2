@@ -37,7 +37,7 @@
                     Card Header
                   </div>
                   <div class="card-body">
-                    <form action="/scores" method="post">
+                    <form action="/inputMatches" method="post">
                       
                       <div class="mb-3">
                         <label for="matchDate" class="form-label">Match Date</label>
@@ -45,7 +45,7 @@
                           type="date"
                           class="form-control"
                           name="matchDate"
-                          id="match[matchDate]"
+                          id="matchDate"
                           placeholder=""
                           required
                         />
@@ -88,7 +88,7 @@
                     </div>
     
                     <div class="pairings col-md-3" >
-                      <h3>Pairings <span class="badge bg-primary rounded-pill"><%= groupsRR[groupNumber].length %></span></h3>
+                      <h3>Matches <span class="badge bg-primary rounded-pill"><%= groupsRR[groupNumber].length %></span></h3>
                       <ul class="list-group">
                         <% groupsRR[groupNumber].forEach(pair => { %>
                           <li class="list-group-item d-flex justify-content-between align-items-center">
