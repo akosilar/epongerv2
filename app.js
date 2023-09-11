@@ -14,7 +14,8 @@ const player = require('./models/player')
 // const catchAsync = require('./utils/catchAsync')
 // const ExpressError = require('./utils/ExpressError')
 
-const GroupGenerator = require('./controllers/roundrobin')
+const GroupGenerator = require('./public/roundrobin')
+const Rating = require('./public/rating')
 
 //local db connection
 mongoose.connect('mongodb://localhost:27017/eponger')
@@ -164,6 +165,12 @@ app.post('/scores', async (req, res) => {
 
     //acquire the first match, and pass the matchDate on the redirect
     const firstMatch = await Match.findById(Object.keys(match)[0])
+
+
+    // const p1_rating = Player.findById(match[0].p1_id).rating
+    console.log(match)
+    // console.log(p1_rating)
+    // const rating = new Rating(match[0].p1_score, match[0].p2_score)
 
     res.redirect(`/scores?matchDate=${firstMatch.matchDate}`);
 
