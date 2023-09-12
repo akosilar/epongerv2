@@ -27,71 +27,7 @@
             <h1>Matches</h1>
           </div>
 
-          <form method="post" action="/addMatch" hidden>
-            <div class="row">
-              <div class="mb-3">
-                <label for="matchDate" class="form-label">Match Date</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  name="match[matchDate]""
-                  id="matchDate"
-                  placeholder=""
-                  required
-                />
-                <div class="mb-3 col-md-3">
-                  <label for="group" class="form-label">Group</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    name="match[group]"
-                    id="number"
-                    placeholder=""
-                    required
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="player1Select">Select Player 1:</label>
-                  <select class="form-control form-control-sm" id="player1Select" name="match[p1_id]">
-                    <option value="">Select a player...</option>
-                    <% players.forEach(player => { %>
-                      <option value="<%= player._id %>"><%= player.firstName %> <%= player.lastName %></option>
-                    <% }) %>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="player1Score">Player 1 Score:</label>
-                  <input type="number" class="form-control form-control-sm" id="player1Score" name="match[p1_score]">
-                </div>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="player2Select">Select Player 2:</label>
-                  <select class="form-control form-control-sm" id="player2Select" name="match[p2_id]">
-                    <option value="">Select a player...</option>
-                    <% players.forEach(player => { %>
-                      <option value="<%= player._id %>"><%= player.firstName %> <%= player.lastName %></option>
-                    <% }) %>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="player2Score">Player 2 Score:</label>
-                  <input type="number" class="form-control form-control-sm" id="player2Score" name="match[p2_score]">
-                </div>
-              </div>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+         
           
           
 

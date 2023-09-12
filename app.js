@@ -158,20 +158,18 @@ app.post('/scores', async (req, res) => {
             const { p1_score, p2_score } = match[matchId];
 
             // Update the Match document in the database with the new scores
-            await Match.findByIdAndUpdate(matchId, { p1_score, p2_score });
+            const result = await Match.findByIdAndUpdate(matchId, { p1_score, p2_score });
+            console.log(result)
         }
     }
 
 
     //acquire the first match, and pass the matchDate on the redirect
-    const firstMatch = await Match.findById(Object.keys(match)[0])
+    const firstMatch = await Match.findById(Object.keys(match)[0]).populate('p1_id', 'rating').populate('p2_id', 'rating')
 
 
-    // const p1_rating = Player.findById(match[0].p1_id).rating
-    console.log(match)
-    // console.log(p1_rating)
-    // const rating = new Rating(match[0].p1_score, match[0].p2_score)
-
+    // const rating = new Rating(firstMatch.p1_score, firstMatch.p2_score, firstMatch.p1_id.rating, firstMatch.p2_id.rating)
+    // console.log(rating.changeRating())
     res.redirect(`/scores?matchDate=${firstMatch.matchDate}`);
 
 });
@@ -206,12 +204,7 @@ app.post('/inputMatches', async (req, res) => {
 });
 
 
-app.post('/addMatch', async (req, res) => {
-    const match = new Match(req.body.match)
-    console.log(match)
-    await match.save()
-    res.redirect('/matches')
-})
+
 
 //add new player
 app.post('/', async (req, res) => {

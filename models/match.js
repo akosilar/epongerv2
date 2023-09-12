@@ -13,6 +13,8 @@ const MatchSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Player'
     },
+    p1_rating_change: Number,
+    p2_rating_change: Number,
     group: Number,
     matchDate: Date
 })
