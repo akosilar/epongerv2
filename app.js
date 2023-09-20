@@ -152,24 +152,39 @@ app.post('/makeGroups', async (req, res) => {
 app.post('/scores', async (req, res) => {
     const { match } = req.body
 
-
     for (const matchId in match) {
         if (match.hasOwnProperty(matchId)) {
             const { p1_score, p2_score } = match[matchId];
 
             // Update the Match document in the database with the new scores
-            const result = await Match.findByIdAndUpdate(matchId, { p1_score, p2_score });
-            console.log(result)
+            const result = await Match.findByIdAndUpdate(matchId, { p1_score, p2_score }).populate('p1_id', 'rating').populate('p2_id', 'rating');
+
+            //store rating change into match document if scores are populated, and update player rating
+            if (p1_score && p2_score) {
+                const rating = new Rating(p1_score, p2_score, result.p1_id.rating, result.p2_id.rating)
+                result.p1_rating_change = rating.calculateRating()[0];
+                // const p1 = await Player.findByIdAndUpdate(result.p1_id, { rating: result.p1_id.rating += result.p1_rating_change })
+
+                result.p2_rating_change = rating.calculateRating()[1];
+                // const p2 = await Player.findByIdAndUpdate(result.p2_id, { rating: result.p2_id.rating += result.p2_rating_change })
+
+                // p1.save()
+                // p2.save()
+
+            } else {
+                //clear rating changes
+                result.p1_rating_change = ''
+                result.p2_rating_change = ''
+            }
+
+
+            result.save();
+
         }
     }
-
-
     //acquire the first match, and pass the matchDate on the redirect
     const firstMatch = await Match.findById(Object.keys(match)[0]).populate('p1_id', 'rating').populate('p2_id', 'rating')
 
-
-    // const rating = new Rating(firstMatch.p1_score, firstMatch.p2_score, firstMatch.p1_id.rating, firstMatch.p2_id.rating)
-    // console.log(rating.changeRating())
     res.redirect(`/scores?matchDate=${firstMatch.matchDate}`);
 
 });

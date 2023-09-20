@@ -29,16 +29,16 @@ class Rating {
         return `from determinerating ${rating}`
     }
 
-    changeRating() {
+    calculateRating() {
 
         const rating = this.determineRating(Math.abs(this.p2_rating - this.p1_rating))
         const p1_rating_change = this.p1_score * rating[1] - this.p2_score * rating[0]
         const p2_rating_change = this.p2_score * rating[0] - this.p1_score * rating[1]
 
-        console.log(rating)
-        console.log(`p1 score: ${this.p1_score} and p2 score: ${this.p2_score}`)
-        console.log(`p1 will change ${p1_rating_change} and p2 will change ${p2_rating_change}`)
-        console.log((`${this.p1_rating} minus ${this.p2_rating} is ${this.p1_rating - this.p2_rating}`))
+        // console.log(rating)
+        // console.log(`p1 score: ${this.p1_score} and p2 score: ${this.p2_score}`)
+        // console.log(`p1 will change ${p1_rating_change} and p2 will change ${p2_rating_change}`)
+        // console.log((`${this.p1_rating} minus ${this.p2_rating} is ${this.p1_rating - this.p2_rating}`))
         return [p1_rating_change, p2_rating_change]
     }
 }
