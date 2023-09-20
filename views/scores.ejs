@@ -83,22 +83,22 @@
 
                               <th>Player</th>
                               <th class="col-sm-2">Score</th>
-                              <th class="col-sm-2">Rating Change</th>
+                              <th class="col-sm-2">New Rating</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td><%= match.p1_id.firstName %> <%= match.p1_id.lastName %> - <%= match.p1_id.rating %></td>
+                              <td><%= match.p1_id.firstName %> <%= match.p1_id.lastName %> - <%= match.p1_id.rating %> <% if (match.p1_rating_change) {%> + (<%= match.p1_rating_change  %>) <% } %></td>
                               <td><input type="number" class="form-control form-control-sm" min="0" value="<%= match.p1_score %>" name="match[<%= match._id %>][p1_score]"></td>
-                              <td><%= match.p1_rating_change %></td>
+                              <td><% if (match.p1_rating_change) { %><%= match.p1_id.rating + match.p1_rating_change %><% } %></td>
 
 
 
                             </tr>
                             <tr>
-                              <td><%= match.p2_id.firstName %> <%= match.p2_id.lastName %> - <%= match.p2_id.rating%></td>
+                              <td><%= match.p2_id.firstName %> <%= match.p2_id.lastName %> - <%= match.p2_id.rating%> <% if (match.p1_rating_change) {%> + (<%= match.p2_rating_change  %>) <% } %></td>
                               <td><input type="number" class="form-control form-control-sm" min="0" value="<%= match.p2_score %>" name="match[<%= match._id %>][p2_score]"></td>
-                              <td><%= match.p2_rating_change %></td>
+                              <td><% if (match.p1_rating_change) { %> <%= match.p2_id.rating + match.p2_rating_change %><% } %></td>
 
                             </tr>
                           </tbody>
