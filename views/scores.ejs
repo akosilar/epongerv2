@@ -29,8 +29,8 @@
       
           <div class="container mt-5 mb-3">
             <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card">
+                <div class="col-md-3">
+                    <div class="card" style="width: 12rem;">
                         <div class="card-body">
                             <form action="/scores" method="get" id="dateForm">
                                 <div class="form-group">
@@ -46,7 +46,10 @@
         </div>
 
           <div class="matches">
-        
+            <div>
+              <button class="btn btn-primary" id="submitScoresBtn">Save Scores</button>
+              <button class="btn btn-warning" id="updateRatingsBtn">Update Ratings</button>
+            </div>
             <!-- Create a tab navigation for the groups -->
             <ul class="nav nav-tabs" id="groupTabs" role="tablist">
 
@@ -59,17 +62,16 @@
                 </li>
               <% }) %>
             </ul>
+
+            
             
             <div class="tab-content" id="groupTabsContent">
               <% uniqueGroups.forEach((group, index) => { %>
                 <div class="tab-pane fade <%= index === 0 ? 'show active' : '' %>" id="group<%= group %>Tab" role="tabpanel" aria-labelledby="group<%= group %>Tab">
                   <div class="row">
                     <div class="col-md-5">
-                      <form action="/scores" method="post">
-                        <div>
-                          <button class="btn btn-primary">Submit Scores</button>
-
-                        </div>
+                      <form action="/scores" method="post" id="scoreForm" >
+                       
 
                       <% const groupMatches = matches.filter(match => match.group === group); %>
                       <% groupMatches.forEach((match) => { %>
@@ -78,8 +80,8 @@
                         <table class="table table-bordered">
                           <thead>
                             <tr>
-                              <%= match.matchDate %>
-                              <%= match._id %>
+
+
 
                               <th>Player</th>
                               <th class="col-sm-2">Score</th>
@@ -89,7 +91,9 @@
                           <tbody>
                             <tr>
                               <td><%= match.p1_id.firstName %> <%= match.p1_id.lastName %> - <%= match.p1_id.rating %> <% if (match.p1_rating_change) {%> + (<%= match.p1_rating_change  %>) <% } %></td>
-                              <td><input type="number" class="form-control form-control-sm" min="0" value="<%= match.p1_score %>" name="match[<%= match._id %>][p1_score]"></td>
+                              <td><input id="p1_score_<%= match._id %>" type="number" class="score-input form-control form-control-sm" min="0" value="<%= match.p1_score %>" name="match[<%= match._id %>][p1_score]"></td>
+
+
                               <td><% if (match.p1_rating_change) { %><%= match.p1_id.rating + match.p1_rating_change %><% } %></td>
 
 
@@ -97,7 +101,9 @@
                             </tr>
                             <tr>
                               <td><%= match.p2_id.firstName %> <%= match.p2_id.lastName %> - <%= match.p2_id.rating%> <% if (match.p1_rating_change) {%> + (<%= match.p2_rating_change  %>) <% } %></td>
-                              <td><input type="number" class="form-control form-control-sm" min="0" value="<%= match.p2_score %>" name="match[<%= match._id %>][p2_score]"></td>
+                              <td><input id="p2_score_<%= match._id %>" type="number" class="score-input form-control form-control-sm" min="0" value="<%= match.p2_score %>" name="match[<%= match._id %>][p2_score]"></td>
+
+
                               <td><% if (match.p1_rating_change) { %> <%= match.p2_id.rating + match.p2_rating_change %><% } %></td>
 
                             </tr>
@@ -139,6 +145,22 @@
           form.submit();
       }
   </script>
+  <script>
+    document.getElementById('updateRatingsBtn').addEventListener('click', function () {
+      const scoreInputs =  document.querySelectorAll('.score-input')
+   scoreInputs.forEach(input => {
+    input.disabled = true;
+   })
+    })
+
+   
+  </script>
+  <script>
+    // JavaScript to manually submit the form when the button is clicked
+    document.getElementById('submitScoresBtn').addEventListener('click', function () {
+        document.getElementById('scoreForm').submit();
+    });
+</script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
     <script>

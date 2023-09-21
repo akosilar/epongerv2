@@ -170,7 +170,6 @@ app.post('/scores', async (req, res) => {
 
                 // p1.save()
                 // p2.save()
-
             } else {
                 //clear rating changes
                 result.p1_rating_change = ''
