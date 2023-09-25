@@ -48,7 +48,8 @@
           <div class="matches">
             <div>
               <button class="btn btn-primary" id="submitScoresBtn">Save Scores</button>
-              <button class="btn btn-warning" id="updateRatingsBtn">Update Ratings</button>
+              <% if(areAllScoresPopulated(matches)) { %><button class="btn btn-warning" id="updateRatingsBtn">Update Ratings</button><% } %>
+
             </div>
             <!-- Create a tab navigation for the groups -->
             <ul class="nav nav-tabs" id="groupTabs" role="tablist">

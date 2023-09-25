@@ -97,7 +97,20 @@ app.get('/scores', async (req, res) => {
     } : {})
         .populate('p1_id', 'firstName lastName rating')
         .populate('p2_id', 'firstName lastName rating');
-    res.render('scores', { matches, targetDate, pageName: 'scores' })
+
+
+    function areAllScoresPopulated(matches) {
+        // Check if all matches have p1_score and p2_score populated
+        for (const match of matches) {
+            if (!(match.p1_score) || !(match.p2_score)) {
+                return false; // At least one match is missing scores
+            }
+        }
+        return true; // All matches have p1_score and p2_score populated
+    }
+
+
+    res.render('scores', { matches, targetDate, pageName: 'scores', areAllScoresPopulated })
 })
 
 app.get('/sheets', (req, res) => {
